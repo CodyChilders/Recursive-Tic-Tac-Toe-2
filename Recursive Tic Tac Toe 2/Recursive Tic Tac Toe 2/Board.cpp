@@ -3,6 +3,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Board.h"
+#include "GlobalVariables.h"
 
 #define and &&
 #define or ||
@@ -86,7 +87,9 @@ void Board::DrawX(int px, int py, int dx, int dy)
 
 void Board::DrawO(int px, int py, int dx, int dy)
 {
-	std::cout << "Board.DrawO() not yet implemented\n";
+	//std::cout << "Board.DrawO() not yet implemented\n";
+	sf::CircleShape shape(100.f);
+	shape.setFillColor(sf::Color::Green);
 }
 
 void Board::CreateNewBoard()

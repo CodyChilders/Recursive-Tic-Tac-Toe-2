@@ -1,7 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include "BoardContainer.h"
+#include "GlobalVariables.h"
 
 #define BC BoardContainer
+#define and &&
+#define or ||
+#define not !
 
 BC::BoardContainer()
 {
@@ -35,7 +39,22 @@ void BC::ProcessMouseEvent()
 
 void BC::Draw()
 {
-
+	//if the game is still ongoing
+	if (movesPerformed < 9)
+	{
+		DrawLines();
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				board[i][j].Draw();
+			}
+		}
+	}
+	else //If the game has been completed
+	{
+		DrawWinner();
+	}
 }
 
 void BC::CreateNewBoard()
@@ -97,46 +116,46 @@ void BC::CheckForWin()
 	for (int i = PLAYER1; i <= PLAYER2; i++)
 	{
 		//Rows
-		if (board[0][0].GetWinner() == i && board[0][1].GetWinner() == i && board[0][2].GetWinner() == i)
+		if (board[0][0].GetWinner() == i and board[0][1].GetWinner() == i and board[0][2].GetWinner() == i)
 		{
 			foundWin = true;
 			goto BoardContainer_CheckForWin_SkipFurtherChecking;
 		}
-		if (board[1][0].GetWinner() == i && board[1][1].GetWinner() == i && board[1][2].GetWinner() == i)
+		if (board[1][0].GetWinner() == i and board[1][1].GetWinner() == i and board[1][2].GetWinner() == i)
 		{
 			foundWin = true;
 			goto BoardContainer_CheckForWin_SkipFurtherChecking;
 		}
-		if (board[2][0].GetWinner() == i && board[2][1].GetWinner() == i && board[2][2].GetWinner() == i)
+		if (board[2][0].GetWinner() == i and board[2][1].GetWinner() == i and board[2][2].GetWinner() == i)
 		{
 			foundWin = true;
 			goto BoardContainer_CheckForWin_SkipFurtherChecking;
 		}
 
 		//columns
-		if (board[0][0].GetWinner() == i && board[1][0].GetWinner() == i && board[2][0].GetWinner() == i)
+		if (board[0][0].GetWinner() == i and board[1][0].GetWinner() == i and board[2][0].GetWinner() == i)
 		{
 			foundWin = true;
 			goto BoardContainer_CheckForWin_SkipFurtherChecking;
 		}
-		if (board[0][1].GetWinner() == i && board[1][1].GetWinner() == i && board[2][1].GetWinner() == i)
+		if (board[0][1].GetWinner() == i and board[1][1].GetWinner() == i and board[2][1].GetWinner() == i)
 		{
 			foundWin = true;
 			goto BoardContainer_CheckForWin_SkipFurtherChecking;
 		}
-		if (board[0][2].GetWinner() == i && board[1][2].GetWinner() == i && board[2][2].GetWinner() == i)
+		if (board[0][2].GetWinner() == i and board[1][2].GetWinner() == i and board[2][2].GetWinner() == i)
 		{
 			foundWin = true;
 			goto BoardContainer_CheckForWin_SkipFurtherChecking;
 		}
 
 		//diagonals
-		if (board[0][0].GetWinner() == i && board[1][1].GetWinner() == i && board[2][2].GetWinner() == i)
+		if (board[0][0].GetWinner() == i and board[1][1].GetWinner() == i and board[2][2].GetWinner() == i)
 		{
 			foundWin = true;
 			goto BoardContainer_CheckForWin_SkipFurtherChecking;
 		}
-		if (board[2][0].GetWinner() == i && board[1][1].GetWinner() == i && board[0][2].GetWinner() == i)
+		if (board[2][0].GetWinner() == i and board[1][1].GetWinner() == i and board[0][2].GetWinner() == i)
 		{
 			foundWin = true;
 			//the goto is unnecessary because the check is the next line anyway

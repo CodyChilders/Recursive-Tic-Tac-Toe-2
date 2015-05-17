@@ -5,10 +5,11 @@
 #include <SFML/Main.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics.hpp>
+#include "GlobalVariables.h"
 #include "Board.h"
 #include "BoardContainer.h"
 
-const int w = 1150, h = 950;
+int w = 1150, h = 950;
 
 typedef BoardContainer* Game;
 
@@ -25,8 +26,7 @@ void Setup()
 
 void Draw()
 {
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	
 
 	while (window.isOpen())
 	{
@@ -41,7 +41,7 @@ void Draw()
 		}
 
 		window.clear();
-		window.draw(shape);
+		//window.draw(shape);
 		game->Draw();
 		window.display();
 	}
