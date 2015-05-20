@@ -75,7 +75,26 @@ int Board::GetWinner()
 
 void Board::DrawLines()
 {
-	std::cout << "Board.DrawLines() not yet implemented\n";
+	//the rectangle defining the verticle lines
+	sf::Vector2f vertLinesSize(lineThickness, h);
+	sf::RectangleShape vertLine(vertLinesSize);
+	vertLine.setFillColor(lineColor);
+	vertLine.setOutlineColor(lineColor);
+	//set the position of each and draw it
+	vertLine.setPosition(x + w / 3, 0);
+	window.draw(vertLine);
+	vertLine.setPosition(x + w * 2 / 3, 0);
+	window.draw(vertLine);
+	//draw the horozontal lines
+	sf::Vector2f horzLinesSize(w, lineThickness);
+	sf::RectangleShape horzLine(horzLinesSize);
+	horzLine.setFillColor(lineColor);
+	horzLine.setOutlineColor(lineColor);
+	//set the position of each and draw it
+	horzLine.setPosition(0, y + h / 3);
+	window.draw(horzLine);
+	horzLine.setPosition(0, y + h * 2 / 3);
+	window.draw(horzLine);
 }
 
 void Board::DrawWinner()

@@ -6,6 +6,9 @@ public:
 	typedef enum BoardStates {EMPTY = 0, PLAYER1 = 1, PLAYER2 = 2};
 	const sf::Color xColor = sf::Color::Red;
 	const sf::Color oColor = sf::Color::Blue;
+	const sf::Color lineColor = sf::Color(128, 128, 128);
+	const int distanceFromEdges = 10;
+	const int lineThickness = 5;
 
 	Board();
 	Board(int px, int py, int dx, int dy);
