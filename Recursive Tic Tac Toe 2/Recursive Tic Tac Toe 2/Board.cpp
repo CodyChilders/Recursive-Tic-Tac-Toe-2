@@ -128,8 +128,8 @@ void Board::DrawX(int px, int py, int dx, int dy)
 	tl2br.setRotation(45);
 	tr2bl.setRotation(-45);
 	//position
-	tl2br.setPosition(px, py);
-	tr2bl.setPosition(px, py);
+	tl2br.setPosition(px + dx / 2, py + dy / 2);
+	tr2bl.setPosition(px + dx / 2, py + dy / 2);
 	//draw
 	window.draw(tl2br);
 	window.draw(tr2bl);
