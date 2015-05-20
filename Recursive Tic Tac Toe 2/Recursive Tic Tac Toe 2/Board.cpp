@@ -96,14 +96,30 @@ void Board::DrawWinner()
 
 void Board::DrawX(int px, int py, int dx, int dy)
 {
-	std::cout << "Board.DrawX() not yet implemented\n";
+	sf::Vector2f size(dx, dy / 3);
+	sf::RectangleShape tl2br(size); //top left to bottom right bar
+	sf::RectangleShape tr2bl(size); //top right to bottom left bar
+	//set the origin to the middle of the shape
+	tl2br.setOrigin(size.x / 2, size.y / 2);
+	tr2bl.setOrigin(size.x / 2, size.y / 2);
+	//set the colors
+	tl2br.setFillColor(xColor);
+	tr2bl.setFillColor(xColor);
+	//set the rotations
+	tl2br.setRotation(45);
+	tr2bl.setRotation(-45);
+	//position
+	tl2br.setPosition(px, py);
+	tr2bl.setPosition(px, py);
+	//draw
+	window.draw(tl2br);
+	window.draw(tr2bl);
 }
 
 void Board::DrawO(int px, int py, int dx, int dy)
 {
-	//std::cout << "Board.DrawO() not yet implemented\n";
 	sf::CircleShape shape(dx / 2);
-	shape.setFillColor(sf::Color::Blue);
+	shape.setFillColor(oColor);
 	sf::Vector2f pos(px, py);
 	shape.setPosition(pos);
 	window.draw(shape);
@@ -116,7 +132,7 @@ void Board::CreateNewBoard()
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			board[i][j] = PLAYER2;//EMPTY;
+			board[i][j] = (i + j) % 2 + 1;//PLAYER1;//EMPTY;
 		}
 	}
 }

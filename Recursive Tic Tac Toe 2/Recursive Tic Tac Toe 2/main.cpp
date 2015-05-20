@@ -39,9 +39,7 @@ void Draw()
 			}
 		}
 
-		window.clear();
-		game->Draw();
-		//window.draw(shape);
+		window.clear(backgroundColor);
 		game->Draw();
 		window.display();
 	}

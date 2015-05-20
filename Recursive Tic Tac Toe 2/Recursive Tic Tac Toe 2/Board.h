@@ -4,6 +4,8 @@ class Board
 {
 public:
 	typedef enum BoardStates {EMPTY = 0, PLAYER1 = 1, PLAYER2 = 2};
+	const sf::Color xColor = sf::Color::Red;
+	const sf::Color oColor = sf::Color::Blue;
 
 	Board();
 	Board(int px, int py, int dx, int dy);
