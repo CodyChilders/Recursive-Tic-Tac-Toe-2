@@ -7,6 +7,7 @@ public:
 
 	Board();
 	Board(int px, int py, int dx, int dy);
+	Board(Board* b);
 	~Board();
 
 	virtual void ProcessMouseEvent();
@@ -27,7 +28,7 @@ protected:
 	void DrawO(int px, int py, int dx, int dy);
 
 private:
-	int** board;
+	int board[3][3];
 	void CreateNewBoard();
 	void CheckForWin();
 	void DrawPieces();

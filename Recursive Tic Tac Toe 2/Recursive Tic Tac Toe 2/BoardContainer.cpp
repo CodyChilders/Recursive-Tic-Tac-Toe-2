@@ -25,11 +25,21 @@ BC::BoardContainer(int xx, int yy, int ww, int hh, int recursionDepth)
 
 BC::~BoardContainer()
 {
+	//Delete the board instances
 	for (int i = 0; i < 3; i++)
 	{
-		delete board[i];
+		for (int j = 0; j < 3; j++)
+		{
+			delete board[i][j];
+		}
 	}
-	delete board;
+	//delete the inner arrays
+	for (int i = 0; i < 3; i++)
+	{
+		delete [] board[i];
+	}
+	//delete the outer array
+	delete [] board;
 }
 
 void BC::ProcessMouseEvent()
@@ -47,7 +57,7 @@ void BC::Draw()
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				board[i][j].Draw();
+				board[i][j]->Draw();
 			}
 		}
 	}
@@ -60,10 +70,10 @@ void BC::Draw()
 void BC::CreateNewBoard()
 {
 	//allocate the board array
-	board = new Board*[3];
+	board = new Board**[3];
 	for (int i = 0; i < 3; i++)
 	{
-		board[i] = new Board[3];
+		board[i] = new Board*[3];
 	}
 	//allocate the correct type into the array
 	for (int i = 0; i < 3; i++)
@@ -78,11 +88,11 @@ void BC::CreateNewBoard()
 			//allocate the correct type into the array
 			if (depth == 1)
 			{
-				board[i][j] = Board(a, b, c, d);
+				board[i][j] = new Board(a, b, c, d);
 			}
 			else
 			{
-				board[i][j] = BoardContainer(a, b, c, d, depth - 1);
+				board[i][j] = new BoardContainer(a, b, c, d, depth - 1);
 			}
 		}
 	}
@@ -95,7 +105,7 @@ int BC::SubGamesWon()
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			if (board[i][j].GetWinner() != EMPTY)
+			if (board[i][j]->GetWinner() != EMPTY)
 			{
 				gamesWon++;
 			}
@@ -116,46 +126,46 @@ void BC::CheckForWin()
 	for (int i = PLAYER1; i <= PLAYER2; i++)
 	{
 		//Rows
-		if (board[0][0].GetWinner() == i and board[0][1].GetWinner() == i and board[0][2].GetWinner() == i)
+		if (board[0][0]->GetWinner() == i and board[0][1]->GetWinner() == i and board[0][2]->GetWinner() == i)
 		{
 			foundWin = true;
 			goto BoardContainer_CheckForWin_SkipFurtherChecking;
 		}
-		if (board[1][0].GetWinner() == i and board[1][1].GetWinner() == i and board[1][2].GetWinner() == i)
+		if (board[1][0]->GetWinner() == i and board[1][1]->GetWinner() == i and board[1][2]->GetWinner() == i)
 		{
 			foundWin = true;
 			goto BoardContainer_CheckForWin_SkipFurtherChecking;
 		}
-		if (board[2][0].GetWinner() == i and board[2][1].GetWinner() == i and board[2][2].GetWinner() == i)
+		if (board[2][0]->GetWinner() == i and board[2][1]->GetWinner() == i and board[2][2]->GetWinner() == i)
 		{
 			foundWin = true;
 			goto BoardContainer_CheckForWin_SkipFurtherChecking;
 		}
 
 		//columns
-		if (board[0][0].GetWinner() == i and board[1][0].GetWinner() == i and board[2][0].GetWinner() == i)
+		if (board[0][0]->GetWinner() == i and board[1][0]->GetWinner() == i and board[2][0]->GetWinner() == i)
 		{
 			foundWin = true;
 			goto BoardContainer_CheckForWin_SkipFurtherChecking;
 		}
-		if (board[0][1].GetWinner() == i and board[1][1].GetWinner() == i and board[2][1].GetWinner() == i)
+		if (board[0][1]->GetWinner() == i and board[1][1]->GetWinner() == i and board[2][1]->GetWinner() == i)
 		{
 			foundWin = true;
 			goto BoardContainer_CheckForWin_SkipFurtherChecking;
 		}
-		if (board[0][2].GetWinner() == i and board[1][2].GetWinner() == i and board[2][2].GetWinner() == i)
+		if (board[0][2]->GetWinner() == i and board[1][2]->GetWinner() == i and board[2][2]->GetWinner() == i)
 		{
 			foundWin = true;
 			goto BoardContainer_CheckForWin_SkipFurtherChecking;
 		}
 
 		//diagonals
-		if (board[0][0].GetWinner() == i and board[1][1].GetWinner() == i and board[2][2].GetWinner() == i)
+		if (board[0][0]->GetWinner() == i and board[1][1]->GetWinner() == i and board[2][2]->GetWinner() == i)
 		{
 			foundWin = true;
 			goto BoardContainer_CheckForWin_SkipFurtherChecking;
 		}
-		if (board[2][0].GetWinner() == i and board[1][1].GetWinner() == i and board[0][2].GetWinner() == i)
+		if (board[2][0]->GetWinner() == i and board[1][1]->GetWinner() == i and board[0][2]->GetWinner() == i)
 		{
 			foundWin = true;
 			//the goto is unnecessary because the check is the next line anyway

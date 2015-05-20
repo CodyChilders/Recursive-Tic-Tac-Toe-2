@@ -13,7 +13,15 @@ using namespace std;
 
 Board::Board()
 {
-	//throw new std::exception("ERROR: can not create Board from an empty constructor.");
+	/*
+	CreateNewBoard();
+	x = 0;
+	y = 0;
+	w = 500;
+	h = 500;
+	movesPerformed = 0;
+	winner = EMPTY;
+	*/
 }
 
 Board::Board(int xx, int yy, int ww, int hh)
@@ -27,13 +35,36 @@ Board::Board(int xx, int yy, int ww, int hh)
 	winner = EMPTY;
 }
 
-Board::~Board()
+Board::Board(Board* b)
 {
+	CreateNewBoard();
 	for (int i = 0; i < 3; i++)
 	{
-		delete board[i];
+		for (int j = 0; j < 3; j++)
+		{
+			this->board[i][j] = b->board[i][j];
+		}
 	}
-	delete board;
+	this->x = b->x;
+	this->y = b->y;
+	this->w = b->w;
+	this->h = b->h;
+	this->movesPerformed = b->movesPerformed;
+	this->winner = b->winner;
+}
+
+Board::~Board()
+{
+	/*
+	if (board != nullptr)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			//delete board[i];
+		}
+		delete[] board;
+	}
+	*/
 }
 
 void Board::ProcessMouseEvent()
@@ -95,14 +126,14 @@ void Board::DrawO(int px, int py, int dx, int dy)
 void Board::CreateNewBoard()
 {
 	//allocate the board
-	board = new int*[3];
+	//board = new int*[3];
 	for (int i = 0; i < 3; i++)
 	{
-		board[i] = new int[3];
+		//board[i] = new int[3];
 		//empty it out just to be sure
 		for (int j = 0; j < 3; j++)
 		{
-			board[i][j] = EMPTY;
+			board[i][j] = PLAYER2;//EMPTY;
 		}
 	}
 }
