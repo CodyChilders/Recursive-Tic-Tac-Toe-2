@@ -44,7 +44,6 @@ BC::~BoardContainer()
 
 void BC::ProcessMouseEvent()
 {
-
 }
 
 void BC::Draw()

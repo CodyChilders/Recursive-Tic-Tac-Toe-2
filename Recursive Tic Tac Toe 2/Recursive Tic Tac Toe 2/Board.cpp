@@ -81,9 +81,9 @@ void Board::DrawLines()
 	vertLine.setFillColor(lineColor);
 	vertLine.setOutlineColor(lineColor);
 	//set the position of each and draw it
-	vertLine.setPosition(x + w / 3, 0);
+	vertLine.setPosition(x + w / 3, y);
 	window.draw(vertLine);
-	vertLine.setPosition(x + w * 2 / 3, 0);
+	vertLine.setPosition(x + w * 2 / 3, y);
 	window.draw(vertLine);
 	//draw the horozontal lines
 	sf::Vector2f horzLinesSize(w, lineThickness);
@@ -91,9 +91,9 @@ void Board::DrawLines()
 	horzLine.setFillColor(lineColor);
 	horzLine.setOutlineColor(lineColor);
 	//set the position of each and draw it
-	horzLine.setPosition(0, y + h / 3);
+	horzLine.setPosition(x, y + h / 3);
 	window.draw(horzLine);
-	horzLine.setPosition(0, y + h * 2 / 3);
+	horzLine.setPosition(x, y + h * 2 / 3);
 	window.draw(horzLine);
 }
 
