@@ -9,6 +9,8 @@
 #include "Board.h"
 #include "BoardContainer.h"
 
+#define MS_PER_FRAME 17
+
 int w = 1150, h = 950;
 
 typedef BoardContainer Game;
@@ -27,9 +29,11 @@ void Setup()
 
 void Draw()
 {
-	
 	while (window.isOpen())
 	{
+		//for framerate limiting
+		unsigned int timeAtStart = time(nullptr);
+		//drawing, event handling
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -42,6 +46,10 @@ void Draw()
 		window.clear(backgroundColor);
 		game->Draw();
 		window.display();
+		//for framerate limiting
+		unsigned int timeNow = time(nullptr);
+		unsigned int delta = timeNow - timeAtStart;
+		Sleep(MS_PER_FRAME - delta);
 	}
 }
 
