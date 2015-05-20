@@ -13,15 +13,7 @@ using namespace std;
 
 Board::Board()
 {
-	/*
-	CreateNewBoard();
-	x = 0;
-	y = 0;
-	w = 500;
-	h = 500;
-	movesPerformed = 0;
-	winner = EMPTY;
-	*/
+	
 }
 
 Board::Board(int xx, int yy, int ww, int hh)
@@ -55,16 +47,7 @@ Board::Board(Board* b)
 
 Board::~Board()
 {
-	/*
-	if (board != nullptr)
-	{
-		for (int i = 0; i < 3; i++)
-		{
-			//delete board[i];
-		}
-		delete[] board;
-	}
-	*/
+	
 }
 
 void Board::ProcessMouseEvent()
@@ -119,18 +102,18 @@ void Board::DrawX(int px, int py, int dx, int dy)
 void Board::DrawO(int px, int py, int dx, int dy)
 {
 	//std::cout << "Board.DrawO() not yet implemented\n";
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	sf::CircleShape shape(dx / 2);
+	shape.setFillColor(sf::Color::Blue);
+	sf::Vector2f pos(px, py);
+	shape.setPosition(pos);
+	window.draw(shape);
 }
 
 void Board::CreateNewBoard()
 {
-	//allocate the board
-	//board = new int*[3];
+	//empty it out just to be sure
 	for (int i = 0; i < 3; i++)
 	{
-		//board[i] = new int[3];
-		//empty it out just to be sure
 		for (int j = 0; j < 3; j++)
 		{
 			board[i][j] = PLAYER2;//EMPTY;

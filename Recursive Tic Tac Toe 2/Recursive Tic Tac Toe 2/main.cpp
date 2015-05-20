@@ -11,9 +11,9 @@
 
 int w = 1150, h = 950;
 
-typedef BoardContainer* Game;
+typedef BoardContainer Game;
 
-Game game;
+Game* game;
 bool playerOnesTurn = true;
 bool freshBoard = true;
 sf::RenderWindow window(sf::VideoMode(w, h), "Recursive Tic-Tac-Toe 2");
