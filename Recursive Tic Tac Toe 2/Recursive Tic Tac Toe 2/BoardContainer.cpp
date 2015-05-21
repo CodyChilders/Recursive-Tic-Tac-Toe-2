@@ -48,7 +48,29 @@ BC::~BoardContainer()
 
 void BC::ProcessMouseEvent()
 {
-	printf("BoardContainer.ProcessMouseEvent not yet implemented\n");
+	//printf("BoardContainer.ProcessMouseEvent not yet implemented\n");
+	//if it isn't in the bounds of this square or it is full, no need to do anything
+	if (mouseX < x || mouseY < y || mouseX > x + w || mouseY > y + h || movesPerformed == 9)
+	{
+		return;
+	}
+	//see how many of the sub-games are complete
+	int subGamesCompleteBeforeTurn = SubGamesWon();
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			bool preUpdate = playerOnesTurn;
+			board[i][j]->ProcessMouseEvent();
+			if (preUpdate != playerOnesTurn) //this detects when one of the lower boards changed the state of the board
+			{
+				if (SubGamesWon() != subGamesCompleteBeforeTurn)
+					movesPerformed++;
+				CheckForWin();
+				return;
+			}
+		}
+	}
 }
 
 void BC::Draw()

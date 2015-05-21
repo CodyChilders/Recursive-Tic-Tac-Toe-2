@@ -19,7 +19,7 @@ bool playerOnesTurn = true;
 bool freshBoard = true;
 sf::RenderWindow window(sf::VideoMode(w, h), "Recursive Tic-Tac-Toe 2");
 sf::Color backgroundColor = sf::Color(255, 255, 255);
-int gameRecursionDepth = 3;
+int gameRecursionDepth = 1;
 int msPerFrame = 17;
 
 void Setup()
@@ -42,7 +42,6 @@ void Draw()
 			{
 				return;
 			}
-			/*
 			//mouse being clicked
 			if (event.type == sf::Event::MouseButtonPressed)
 			{
@@ -50,9 +49,7 @@ void Draw()
 				mouseX = mousePosition.x;
 				mouseY = mousePosition.y;
 				game->ProcessMouseEvent();
-				printf("Mouse Pressed\n");
 			}
-			*/
 		}
 
 		window.clear(backgroundColor);

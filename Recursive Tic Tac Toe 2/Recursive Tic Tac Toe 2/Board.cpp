@@ -51,7 +51,31 @@ Board::~Board()
 
 void Board::ProcessMouseEvent()
 {
-	std::cout << "Board.ProcessMouseEvent() not yet implemented\n";
+	//std::cout << "Board.ProcessMouseEvent() not yet implemented\n";
+	//no need to update this board if the mouse is not in bounds or the board is full
+	if (mouseX < x || mouseY < y || mouseX > x + w || mouseY > y + h || movesPerformed == 9)
+	{
+		return;
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			//only have to process less-than since it checks in increasing order
+			//also, only have to check one because the mouse can only click once per turn
+			if (mouseX < w + h * (i + 1) / 3 && mouseY < y + h * (j + 1) / 3)
+			{
+				if (board[i][j] == EMPTY)
+				{
+					board[i][j] = (playerOnesTurn ? PLAYER1 : PLAYER2);
+					playerOnesTurn = !playerOnesTurn;
+					movesPerformed++;
+					CheckForWin();
+				}
+				return;
+			}
+		}
+	}
 }
 
 void Board::Draw()
