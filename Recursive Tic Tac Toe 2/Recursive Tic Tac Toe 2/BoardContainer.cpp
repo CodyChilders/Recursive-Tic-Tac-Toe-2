@@ -9,11 +9,15 @@
 
 BC::BoardContainer()
 {
-	//throw new std::exception("ERROR: BoardContainer can not be created with the default constructor");
+	
 }
 
 BC::BoardContainer(int xx, int yy, int ww, int hh, int recursionDepth)
 {
+	if (recursionDepth <= 0)
+	{
+		throw new std::exception("ERROR: can't create a board container with a negative depth.  It will result in an infinite construction and eat all memory");
+	}
 	x = xx;
 	y = yy;
 	w = ww;
@@ -44,6 +48,7 @@ BC::~BoardContainer()
 
 void BC::ProcessMouseEvent()
 {
+	printf("BoardContainer.ProcessMouseEvent not yet implemented\n");
 }
 
 void BC::Draw()

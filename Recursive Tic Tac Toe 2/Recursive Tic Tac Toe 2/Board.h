@@ -7,13 +7,13 @@ public:
 	const sf::Color xColor = sf::Color::Red;
 	const sf::Color oColor = sf::Color::Blue;
 	const sf::Color lineColor = sf::Color(128, 128, 128);
-	const int distanceFromEdges = 10;
-	const int lineThickness = 5;
+	const int distanceFromEdges = 7;
+	const int lineThickness = 2;
 
 	Board();
 	Board(int px, int py, int dx, int dy);
 	Board(Board* b);
-	~Board();
+	virtual ~Board();
 
 	virtual void ProcessMouseEvent();
 	virtual void Draw();

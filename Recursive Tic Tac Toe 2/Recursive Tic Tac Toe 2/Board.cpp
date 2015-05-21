@@ -1,6 +1,5 @@
 #include <iostream>
 #include <exception>
-#include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Board.h"
 #include "GlobalVariables.h"
@@ -76,24 +75,24 @@ int Board::GetWinner()
 void Board::DrawLines()
 {
 	//the rectangle defining the verticle lines
-	sf::Vector2f vertLinesSize(lineThickness, h);
+	sf::Vector2f vertLinesSize(lineThickness, h - 2 * distanceFromEdges);
 	sf::RectangleShape vertLine(vertLinesSize);
 	vertLine.setFillColor(lineColor);
 	vertLine.setOutlineColor(lineColor);
 	//set the position of each and draw it
-	vertLine.setPosition(x + w / 3, y);
+	vertLine.setPosition(x + w / 3, y + distanceFromEdges);
 	window.draw(vertLine);
-	vertLine.setPosition(x + w * 2 / 3, y);
+	vertLine.setPosition(x + w * 2 / 3, y + distanceFromEdges);
 	window.draw(vertLine);
 	//draw the horozontal lines
-	sf::Vector2f horzLinesSize(w, lineThickness);
+	sf::Vector2f horzLinesSize(w - 2 * distanceFromEdges, lineThickness);
 	sf::RectangleShape horzLine(horzLinesSize);
 	horzLine.setFillColor(lineColor);
 	horzLine.setOutlineColor(lineColor);
 	//set the position of each and draw it
-	horzLine.setPosition(x, y + h / 3);
+	horzLine.setPosition(x + distanceFromEdges, y + h / 3);
 	window.draw(horzLine);
-	horzLine.setPosition(x, y + h * 2 / 3);
+	horzLine.setPosition(x + distanceFromEdges, y + h * 2 / 3);
 	window.draw(horzLine);
 }
 
@@ -151,7 +150,7 @@ void Board::CreateNewBoard()
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			board[i][j] = (i + j) % 2 + 1;//PLAYER1;//EMPTY;
+			board[i][j] = EMPTY;//(i + j) % 2 + 1;//PLAYER1;//EMPTY;
 		}
 	}
 }

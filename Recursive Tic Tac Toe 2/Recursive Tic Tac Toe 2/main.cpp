@@ -1,26 +1,26 @@
 #include <cstdlib>
 #include <ctime>
 #include <Windows.h>
-#include <SFML/Audio.hpp>
 #include <SFML/Main.hpp>
-#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include "GlobalVariables.h"
 #include "Board.h"
 #include "BoardContainer.h"
-
-#define MS_PER_FRAME 17
 
 int w = 1150, h = 950;
 
 typedef BoardContainer Game;
 
 Game* game;
+int mouseX = 0,
+	mouseY = 0;
 bool playerOnesTurn = true;
 bool freshBoard = true;
 sf::RenderWindow window(sf::VideoMode(w, h), "Recursive Tic-Tac-Toe 2");
 sf::Color backgroundColor = sf::Color(255, 255, 255);
-int gameRecursionDepth = 2;
+int gameRecursionDepth = 3;
+int msPerFrame = 17;
 
 void Setup()
 {
@@ -32,24 +32,36 @@ void Draw()
 	while (window.isOpen())
 	{
 		//for framerate limiting
-		unsigned int timeAtStart = time(nullptr);
+		time_t timeAtStart = time(nullptr);
 		//drawing, event handling
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
+			//window closing
 			if (event.type == sf::Event::Closed)
 			{
 				return;
 			}
+			/*
+			//mouse being clicked
+			if (event.type == sf::Event::MouseButtonPressed)
+			{
+				sf::Vector2i mousePosition = sf::Mouse::getPosition();
+				mouseX = mousePosition.x;
+				mouseY = mousePosition.y;
+				game->ProcessMouseEvent();
+				printf("Mouse Pressed\n");
+			}
+			*/
 		}
 
 		window.clear(backgroundColor);
 		game->Draw();
 		window.display();
 		//for framerate limiting
-		unsigned int timeNow = time(nullptr);
-		unsigned int delta = timeNow - timeAtStart;
-		Sleep(MS_PER_FRAME - delta);
+		time_t timeNow = time(nullptr);
+		time_t delta = timeNow - timeAtStart;
+		Sleep(static_cast<unsigned int>(msPerFrame - delta));
 	}
 }
 
