@@ -6,11 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "MainMenu.h"
 #include "GlobalVariables.h"
-#include "Board.h"
-#include "BoardContainer.h"
-#include "TTTHud.h"
 #include "StateMachine.h"
-#include "TicTacToe.h"
 
 int w = 1150, h = 950;
 
@@ -65,7 +61,8 @@ void Draw()
 		//for framerate limiting
 		time_t timeNow = time(nullptr);
 		time_t delta = timeNow - timeAtStart;
-		unsigned int sleepTime = static_cast<unsigned int>(msPerFrame - delta);
+		int sleepTime = static_cast<int>(msPerFrame - delta);
+		//printf("Slept thread for %d ms\n", sleepTime);
 		if (sleepTime > 0)
 			Sleep(sleepTime);
 	}
