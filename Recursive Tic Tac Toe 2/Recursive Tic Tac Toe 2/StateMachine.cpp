@@ -59,6 +59,18 @@ void StateMachine::PopState()
 	delete poppedState;
 }
 
+void StateMachine::PopStates(int num)
+{
+	if (num < 0)
+	{
+		throw new std::exception("ERROR: can not pop a negative number of states off the stack");
+	}
+	for (int i = 0; i < num; i++)
+	{
+		PopState();
+	}
+}
+
 void StateMachine::ProcessMouseEvent()
 {
 	try

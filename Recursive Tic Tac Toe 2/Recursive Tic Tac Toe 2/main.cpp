@@ -7,6 +7,7 @@
 #include "MainMenu.h"
 #include "GlobalVariables.h"
 #include "StateMachine.h"
+#include "Shooter.h"
 
 int w = 1150, h = 950;
 
@@ -25,8 +26,10 @@ void Setup()
 {
 	//TicTacToe* ttt = new TicTacToe();
 	//states = new StateMachine(ttt);
-	MainMenu* mm = new MainMenu();
-	states = new StateMachine(mm);
+	//MainMenu* mm = new MainMenu();
+	//states = new StateMachine(mm);
+	Shooter* s = new Shooter();
+	states = new StateMachine(s);
 }
 
 void Draw()

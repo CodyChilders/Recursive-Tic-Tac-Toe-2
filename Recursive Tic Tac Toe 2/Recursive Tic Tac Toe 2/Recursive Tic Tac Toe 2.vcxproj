@@ -86,6 +86,7 @@
     <ClCompile Include="BoardContainer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Shooter.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="TicTacToe.cpp" />
@@ -96,6 +97,7 @@
     <ClInclude Include="BoardContainer.h" />
     <ClInclude Include="GlobalVariables.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="Shooter.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="TicTacToe.h" />

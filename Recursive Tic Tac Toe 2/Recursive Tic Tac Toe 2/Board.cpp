@@ -132,8 +132,8 @@ void Board::DrawWinner()
 	}
 	else
 	{
-		//throw new std::exception("ERROR: winner declared as an invalid type.  This is a bug.");
-		cout << "ERROR: winner declared as an invalid type.  This is a bug.\nThere is normally an exception thrown here." << endl;
+		throw new std::exception("ERROR: winner declared as an invalid type.  This is a bug.");
+		//cout << "ERROR: winner declared as an invalid type.  This is a bug.\nThere is normally an exception thrown here." << endl;
 	}
 }
 
@@ -240,6 +240,13 @@ Board_CheckForWin_SkipFurtherChecking:
 			movesPerformed = 9; //setting this to 9 closes off the board to other moves
 			return;
 		}
+	}
+	//if it exits the loop but 9 moves were performed, it is a cats-game.
+	if (movesPerformed == 9)
+	{
+		CreateNewBoard();
+		movesPerformed = 0;
+		return;
 	}
 }
 

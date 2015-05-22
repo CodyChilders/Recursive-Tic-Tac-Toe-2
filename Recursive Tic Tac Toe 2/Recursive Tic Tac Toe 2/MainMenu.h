@@ -9,6 +9,7 @@ public:
 	~MainMenu();
 	void Draw() override;
 	void ProcessMouseEvent() override;
+
 private:
 	sf::RectangleShape startButton;
 	sf::Font font;

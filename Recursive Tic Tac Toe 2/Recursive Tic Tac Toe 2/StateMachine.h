@@ -11,6 +11,7 @@ public:
 	void Draw();
 	void PushState(State* newState);
 	void PopState();
+	void PopStates(int num);
 	void ProcessMouseEvent();
 	void ProcessKeyboardEvent();
 	void ProcessControllerEvent();
