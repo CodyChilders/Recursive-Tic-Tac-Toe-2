@@ -42,4 +42,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\Orbitron\Orbitron-Black.ttf" />
+    <Font Include="..\Orbitron\Orbitron-Bold.ttf" />
+    <Font Include="..\Orbitron\Orbitron-Medium.ttf" />
+    <Font Include="..\Orbitron\Orbitron-Regular.ttf" />
+  </ItemGroup>
 </Project>

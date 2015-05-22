@@ -1,4 +1,5 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 
 class HUD
 {
@@ -10,6 +11,7 @@ private:
 	int HUDStartX;
 	int HUDWidth;
 	int edgeOffset;
+	sf::Font font;
 	
 	void DrawDividerLine();
 	void DrawTurnText();
