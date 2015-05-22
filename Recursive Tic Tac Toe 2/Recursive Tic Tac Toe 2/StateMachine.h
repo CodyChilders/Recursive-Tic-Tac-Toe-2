@@ -14,6 +14,7 @@ public:
 	void ProcessMouseEvent();
 	void ProcessKeyboardEvent();
 	void ProcessControllerEvent();
+	State* GetCurrentState();
 private:
 	std::stack<State*> states;
 };

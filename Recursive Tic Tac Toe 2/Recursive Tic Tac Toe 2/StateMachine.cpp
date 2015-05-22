@@ -94,3 +94,8 @@ void StateMachine::ProcessControllerEvent()
 		std::cout << e.what() << std::endl;
 	}
 }
+
+State* StateMachine::GetCurrentState()
+{
+	return states.top();
+}
