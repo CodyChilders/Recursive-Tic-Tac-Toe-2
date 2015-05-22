@@ -85,12 +85,18 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="BoardContainer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="TicTacToe.cpp" />
     <ClCompile Include="TTTHud.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardContainer.h" />
     <ClInclude Include="GlobalVariables.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="TicTacToe.h" />
     <ClInclude Include="TTTHud.h" />
   </ItemGroup>
   <ItemGroup>

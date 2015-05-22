@@ -8,13 +8,13 @@
 #include "Board.h"
 #include "BoardContainer.h"
 #include "TTTHud.h"
+#include "StateMachine.h"
+#include "TicTacToe.h"
 
 int w = 1150, h = 950;
 
-typedef BoardContainer Game;
+StateMachine* states;
 
-Game* game;
-HUD* ttt;
 int mouseX = 0,
 	mouseY = 0;
 bool playerOnesTurn = true;
@@ -26,8 +26,8 @@ int msPerFrame = 17;
 
 void Setup()
 {
-	game = new BoardContainer(0, 0, min(w, h), min(w, h), gameRecursionDepth);
-	ttt = new HUD();
+	TicTacToe* ttt = new TicTacToe();
+	states = new StateMachine(ttt);
 }
 
 void Draw()
@@ -51,26 +51,26 @@ void Draw()
 				sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 				mouseX = mousePosition.x;
 				mouseY = mousePosition.y;
-				game->ProcessMouseEvent();
+				states->ProcessMouseEvent();
 			}
 		}
 
 		window.clear(backgroundColor);
-		game->Draw();
-		ttt->DrawHUD();
+		states->Draw();
 		window.display();
 		//for framerate limiting
 		time_t timeNow = time(nullptr);
 		time_t delta = timeNow - timeAtStart;
-		Sleep(static_cast<unsigned int>(msPerFrame - delta));
+		unsigned int sleepTime = static_cast<unsigned int>(msPerFrame - delta);
+		if (sleepTime > 0)
+			Sleep(sleepTime);
 	}
 }
 
 void Teardown()
 {
 	window.close();
-	delete game;
-	delete ttt;
+	delete states;
 	exit(0);
 }
 
