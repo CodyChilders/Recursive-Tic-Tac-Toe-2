@@ -63,7 +63,7 @@ void Board::ProcessMouseEvent()
 		{
 			//only have to process less-than since it checks in increasing order
 			//also, only have to check one because the mouse can only click once per turn
-			if (mouseX < w + h * (i + 1) / 3 && mouseY < y + h * (j + 1) / 3)
+			if (mouseX < x + w * (i + 1) / 3 && mouseY < y + h * (j + 1) / 3)
 			{
 				if (board[i][j] == EMPTY)
 				{
@@ -132,7 +132,8 @@ void Board::DrawWinner()
 	}
 	else
 	{
-		throw new std::exception("ERROR: winner declared as an invalid type.  This is a bug.");
+		//throw new std::exception("ERROR: winner declared as an invalid type.  This is a bug.");
+		cout << "ERROR: winner declared as an invalid type.  This is a bug.\nThere is normally an exception thrown here." << endl;
 	}
 }
 
@@ -174,7 +175,7 @@ void Board::CreateNewBoard()
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			board[i][j] = EMPTY;//(i + j) % 2 + 1;//PLAYER1;//EMPTY;
+			board[i][j] = EMPTY;//(i + j) % 2 + 1;//PLAYER1;
 		}
 	}
 }

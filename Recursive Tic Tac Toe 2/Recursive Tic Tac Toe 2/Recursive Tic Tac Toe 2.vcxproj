@@ -85,11 +85,13 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="BoardContainer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TTTHud.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardContainer.h" />
     <ClInclude Include="GlobalVariables.h" />
+    <ClInclude Include="TTTHud.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

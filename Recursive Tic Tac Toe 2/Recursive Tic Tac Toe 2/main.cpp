@@ -7,12 +7,14 @@
 #include "GlobalVariables.h"
 #include "Board.h"
 #include "BoardContainer.h"
+#include "TTTHud.h"
 
 int w = 1150, h = 950;
 
 typedef BoardContainer Game;
 
 Game* game;
+HUD* ttt;
 int mouseX = 0,
 	mouseY = 0;
 bool playerOnesTurn = true;
@@ -25,6 +27,7 @@ int msPerFrame = 17;
 void Setup()
 {
 	game = new BoardContainer(0, 0, min(w, h), min(w, h), gameRecursionDepth);
+	ttt = new HUD();
 }
 
 void Draw()
@@ -45,7 +48,7 @@ void Draw()
 			//mouse being clicked
 			if (event.type == sf::Event::MouseButtonPressed)
 			{
-				sf::Vector2i mousePosition = sf::Mouse::getPosition();
+				sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 				mouseX = mousePosition.x;
 				mouseY = mousePosition.y;
 				game->ProcessMouseEvent();
@@ -54,6 +57,7 @@ void Draw()
 
 		window.clear(backgroundColor);
 		game->Draw();
+		ttt->DrawHUD();
 		window.display();
 		//for framerate limiting
 		time_t timeNow = time(nullptr);
@@ -66,6 +70,7 @@ void Teardown()
 {
 	window.close();
 	delete game;
+	delete ttt;
 	exit(0);
 }
 
