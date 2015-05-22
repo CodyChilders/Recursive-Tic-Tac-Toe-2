@@ -67,7 +67,14 @@ void StateMachine::PopStates(int num)
 	}
 	for (int i = 0; i < num; i++)
 	{
-		PopState();
+		try
+		{
+			PopState();
+		}
+		catch (std::exception e)
+		{
+			throw e;
+		}
 	}
 }
 
