@@ -16,6 +16,7 @@ public:
 	void ProcessKeyboardEvent();
 	void ProcessControllerEvent();
 	State* GetCurrentState();
+	int count();
 private:
 	std::stack<State*> states;
 };

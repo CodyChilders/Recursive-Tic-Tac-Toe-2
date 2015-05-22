@@ -111,3 +111,8 @@ State* StateMachine::GetCurrentState()
 {
 	return states.top();
 }
+
+int StateMachine::count()
+{
+	return states.size();
+}
