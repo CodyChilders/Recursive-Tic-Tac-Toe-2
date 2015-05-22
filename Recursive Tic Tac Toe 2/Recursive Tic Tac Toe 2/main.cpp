@@ -4,6 +4,7 @@
 #include <SFML/Main.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include "MainMenu.h"
 #include "GlobalVariables.h"
 #include "Board.h"
 #include "BoardContainer.h"
@@ -26,8 +27,10 @@ int msPerFrame = 17;
 
 void Setup()
 {
-	TicTacToe* ttt = new TicTacToe();
-	states = new StateMachine(ttt);
+	//TicTacToe* ttt = new TicTacToe();
+	//states = new StateMachine(ttt);
+	MainMenu* mm = new MainMenu();
+	states = new StateMachine(mm);
 }
 
 void Draw()
@@ -36,6 +39,10 @@ void Draw()
 	{
 		//for framerate limiting
 		time_t timeAtStart = time(nullptr);
+		//Update the mouse information so everything else can find it
+		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+		mouseX = mousePosition.x;
+		mouseY = mousePosition.y;
 		//drawing, event handling
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -48,9 +55,6 @@ void Draw()
 			//mouse being clicked
 			if (event.type == sf::Event::MouseButtonPressed)
 			{
-				sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-				mouseX = mousePosition.x;
-				mouseY = mousePosition.y;
 				states->ProcessMouseEvent();
 			}
 		}

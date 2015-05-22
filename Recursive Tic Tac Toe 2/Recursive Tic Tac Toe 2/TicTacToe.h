@@ -7,8 +7,7 @@ class TicTacToe : public State
 {
 public:
 	TicTacToe();
-	~TicTacToe();
-	void Update() override;
+	~TicTacToe();//gambiarra
 	void Draw() override;
 	void ProcessMouseEvent() override;
 

@@ -18,11 +18,6 @@ TTT::~TicTacToe()
 	delete hud;
 }
 
-void TTT::Update()
-{
-	//nothing, it is on a mouse event model
-}
-
 void TTT::Draw()
 {
 	game->Draw();
