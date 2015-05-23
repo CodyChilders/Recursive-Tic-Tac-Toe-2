@@ -44,6 +44,7 @@ void MM::ProcessMouseEvent()
 {
 	if (startButton.getGlobalBounds().contains(mouseX, mouseY))
 	{
+		audio->PlayButton();
 		states->PushState(new TicTacToe());
 	}
 }

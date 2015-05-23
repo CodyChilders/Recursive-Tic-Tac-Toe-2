@@ -12,6 +12,7 @@
 int w = 1150, h = 950;
 
 StateMachine* states;
+AudioManager* audio;
 
 int mouseX = 0,
 	mouseY = 0;
@@ -26,10 +27,12 @@ void Setup()
 {
 	//TicTacToe* ttt = new TicTacToe();
 	//states = new StateMachine(ttt);
-	//MainMenu* mm = new MainMenu();
-	//states = new StateMachine(mm);
-	Shooter* s = new Shooter();
-	states = new StateMachine(s);
+	MainMenu* mm = new MainMenu();
+	states = new StateMachine(mm);
+	//Shooter* s = new Shooter();
+	//states = new StateMachine(s);
+
+	audio = new AudioManager();
 }
 
 void Draw()
@@ -57,7 +60,7 @@ void Draw()
 				states->ProcessMouseEvent();
 			}
 		}
-
+		states->Update();
 		window.clear(backgroundColor);
 		states->Draw();
 		window.display();

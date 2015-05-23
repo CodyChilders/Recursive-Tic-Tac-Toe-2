@@ -9,6 +9,8 @@
 Shooter::Shooter()
 {
 	InitStars();
+	players[0] = Ship(Ship::Player1);
+	players[1] = Ship(Ship::Player2);
 }
 
 Shooter::~Shooter()
@@ -25,6 +27,7 @@ void Shooter::Draw()
 {
 	window.clear(sf::Color::Black);
 	DrawStars();
+	DrawShips();
 }
 
 void Shooter::ProcessKeyboardEvent()
@@ -59,4 +62,10 @@ void Shooter::InitStars()
 		starLocations.push_back(pos);
 	}
 	starLocations.shrink_to_fit();
+}
+
+void Shooter::DrawShips()
+{
+	players[0].Draw();
+	players[1].Draw();
 }

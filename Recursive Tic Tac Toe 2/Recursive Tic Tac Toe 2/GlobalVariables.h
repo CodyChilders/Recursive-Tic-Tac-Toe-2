@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "StateMachine.h"
+#include "AudioManager.h"
 
 //the window instance
 extern sf::RenderWindow window;
@@ -14,3 +15,5 @@ extern int mouseX;
 extern int mouseY;
 //State machine
 extern StateMachine* states;
+//sound
+extern AudioManager* audio;

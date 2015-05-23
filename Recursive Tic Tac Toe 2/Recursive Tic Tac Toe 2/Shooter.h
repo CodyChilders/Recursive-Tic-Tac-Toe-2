@@ -2,6 +2,7 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "State.h"
+#include "Ship.h"
 
 class Shooter : public State
 {
@@ -12,8 +13,12 @@ public:
 	void Draw() override;
 	void ProcessKeyboardEvent() override;
 	void ProcessControllerEvent() override;
+
 private:
 	std::vector<sf::Vector2f> starLocations;
+	Ship players[2];
+
 	void DrawStars();
 	void InitStars();
+	void DrawShips();
 };
