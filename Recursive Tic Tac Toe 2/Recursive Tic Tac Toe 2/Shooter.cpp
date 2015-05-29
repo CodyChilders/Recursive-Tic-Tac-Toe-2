@@ -32,7 +32,8 @@ void Shooter::Draw()
 
 void Shooter::ProcessKeyboardEvent()
 {
-
+	players[0].ProcessKeyboardEvent();
+	players[1].ProcessKeyboardEvent();
 }
 
 void Shooter::ProcessControllerEvent()

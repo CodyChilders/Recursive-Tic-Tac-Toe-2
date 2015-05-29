@@ -1,4 +1,5 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 
 class Ship
 {
@@ -14,8 +15,14 @@ public:
 
 private:
 	Player config;
+	sf::Vector2f position;
+	sf::Vector2f velocity;
 
 	void ShootProjectile();
 	void HandleWASD();
 	void HandleArrows();
+	void InitPlayer1Settings();
+	void InitPlayer2Settings();
+	void UpdatePosition();
+	void DrawShip();
 };

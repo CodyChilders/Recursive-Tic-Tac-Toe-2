@@ -27,10 +27,10 @@ void Setup()
 {
 	//TicTacToe* ttt = new TicTacToe();
 	//states = new StateMachine(ttt);
-	MainMenu* mm = new MainMenu();
-	states = new StateMachine(mm);
-	//Shooter* s = new Shooter();
-	//states = new StateMachine(s);
+	//MainMenu* mm = new MainMenu();
+	//states = new StateMachine(mm);
+	Shooter* s = new Shooter();
+	states = new StateMachine(s);
 
 	audio = new AudioManager();
 }
@@ -58,6 +58,10 @@ void Draw()
 			if (event.type == sf::Event::MouseButtonPressed)
 			{
 				states->ProcessMouseEvent();
+			}
+			if (event.type == sf::Event::KeyPressed)
+			{
+				states->ProcessKeyboardEvent();
 			}
 		}
 		states->Update();
