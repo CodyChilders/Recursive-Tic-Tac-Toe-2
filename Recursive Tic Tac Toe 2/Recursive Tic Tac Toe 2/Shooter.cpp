@@ -38,7 +38,8 @@ void Shooter::ProcessKeyboardEvent()
 
 void Shooter::ProcessControllerEvent()
 {
-
+	players[0].ProcessControllerEvent();
+	players[1].ProcessControllerEvent();
 }
 
 //This is the starfield that lies behind the game

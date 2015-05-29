@@ -1,9 +1,11 @@
 #include <exception>
+#include <cmath>
 #include <SFML/Graphics.hpp>
 #include "Ship.h"
 #include "GlobalVariables.h"
 
 #define SPEED 2
+#define RotationSpeed 0.1
 #define DampenFactor 0.9
 
 Ship::Ship()
@@ -25,6 +27,7 @@ Ship::Ship(Player p)
 		break;
 	case Player2:
 		InitPlayer2Settings();
+		break;
 	}
 }
 
@@ -57,6 +60,11 @@ void Ship::ProcessKeyboardEvent()
 	}
 }
 
+void Ship::ProcessControllerEvent()
+{
+
+}
+
 void Ship::ShootProjectile()
 {
 
@@ -70,15 +78,17 @@ void Ship::HandleWASD()
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-		velocity.x -= SPEED;
+		//velocity.x -= SPEED;
+		RotateShip(-RotationSpeed);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		velocity.y += SPEED;
+		//velocity.y += SPEED;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
-		velocity.x += SPEED;
+		//velocity.x += SPEED;
+		RotateShip(RotationSpeed);
 	}
 }
 
@@ -117,6 +127,12 @@ void Ship::UpdatePosition()
 	position += velocity;
 	velocity.x *= DampenFactor;
 	velocity.y *= DampenFactor;
+}
+
+void Ship::RotateShip(float angle)
+{
+	velocity.x = velocity.x * cos(angle) - velocity.y * sin(angle);
+	velocity.y = velocity.x * sin(angle) + velocity.y * cos(angle);
 }
 
 void Ship::DrawShip()

@@ -12,6 +12,7 @@ public:
 	void Update();
 	void Draw();
 	void ProcessKeyboardEvent();
+	void ProcessControllerEvent();
 
 private:
 	Player config;
@@ -24,5 +25,6 @@ private:
 	void InitPlayer1Settings();
 	void InitPlayer2Settings();
 	void UpdatePosition();
+	void RotateShip(float angle);
 	void DrawShip();
 };
