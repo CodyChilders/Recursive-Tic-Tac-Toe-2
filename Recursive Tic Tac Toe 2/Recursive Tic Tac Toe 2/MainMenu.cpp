@@ -54,7 +54,7 @@ void MM::DrawTitle()
 	sf::Text text;
 	text.setFont(font);
 	text.setCharacterSize(75);
-	text.setString("Recursive Tic Tac Toe 2");
+	text.setString("X's and O's and Black Holes");
 	text.setColor(sf::Color::Red);
 
 	sf::FloatRect bounds = text.getGlobalBounds();
