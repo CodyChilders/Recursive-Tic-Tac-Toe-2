@@ -21,6 +21,7 @@ private:
 	float velocity;
 
 	sf::Sprite sprite;
+	sf::Texture texture;
 
 	void ShootProjectile();
 	void HandleWASD();

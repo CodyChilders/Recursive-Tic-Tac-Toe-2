@@ -7,6 +7,7 @@
 #define SPEED 5
 #define RotationSpeed 0.1
 #define DampenFactor 0.9
+#define BrakePower 0.7
 #define PI 3.141593
 #define ShipImage "../Images/debug_ship.png"
 
@@ -89,7 +90,7 @@ void Ship::HandleWASD()
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		//apply a brake
+		velocity *= BrakePower;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
@@ -101,19 +102,19 @@ void Ship::HandleArrows()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		
+		velocity = SPEED;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		
+		RotateShip(-RotationSpeed);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		
+		velocity *= BrakePower;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		
+		RotateShip(RotationSpeed);
 	}
 }
 
@@ -128,6 +129,7 @@ void Ship::InitPlayer1Settings()
 	{
 		printf("ERROR: can not load image %s\n", ShipImage);
 	}
+	texture.setSmooth(true);
 	sprite = sf::Sprite(texture);
 	sprite.setOrigin(sf::Vector2f(texture.getSize()) / 2.f);
 }
@@ -138,11 +140,11 @@ void Ship::InitPlayer2Settings()
 	position = sf::Vector2f(3 * w / 4, h / 2);
 	direction = sf::Vector2f(0, 1);
 	//load the sprite
-	sf::Texture texture;
 	if (!texture.loadFromFile(ShipImage))
 	{
 		printf("ERROR: can not load image %s\n", ShipImage);
 	}
+	texture.setSmooth(true);
 	sprite = sf::Sprite(texture);
 	sprite.setOrigin(sf::Vector2f(texture.getSize()) / 2.f);
 }
@@ -151,6 +153,15 @@ void Ship::UpdatePosition()
 {
 	position += direction * velocity;
 	velocity *= DampenFactor;
+	//check if it is out of bounds
+	if (position.x > w)
+		position.x -= w;
+	if (position.x < 0)
+		position.x += w;
+	if (position.y > h)
+		position.y -= h;
+	if (position.y < 0)
+		position.y += h;
 }
 
 void Ship::RotateShip(float angle)
