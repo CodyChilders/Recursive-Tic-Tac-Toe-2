@@ -124,7 +124,6 @@ void Ship::InitPlayer1Settings()
 	position = sf::Vector2f(w / 4, h / 2);
 	direction = sf::Vector2f(0, -1);
 	//load the sprite
-	sf::Texture texture;
 	if (!texture.loadFromFile(ShipImage))
 	{
 		printf("ERROR: can not load image %s\n", ShipImage);
@@ -193,5 +192,18 @@ void Ship::DrawShip()
 	angle *= -1;
 	//set the sprite and draw
 	sprite.setRotation(angle);
+	window.draw(sprite);
+	//Draw the 4 ghost ships so that the transition is always seamless
+	sf::Vector2f p1(position.x + w, position.y);
+	sf::Vector2f p2(position.x - w, position.y);
+	sf::Vector2f p3(position.x, position.y + h);
+	sf::Vector2f p4(position.x, position.y - h);
+	sprite.setPosition(p1);
+	window.draw(sprite);
+	sprite.setPosition(p2);
+	window.draw(sprite);
+	sprite.setPosition(p3);
+	window.draw(sprite);
+	sprite.setPosition(p4);
 	window.draw(sprite);
 }
