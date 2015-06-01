@@ -17,7 +17,10 @@ public:
 private:
 	Player config;
 	sf::Vector2f position;
-	sf::Vector2f velocity;
+	sf::Vector2f direction;
+	float velocity;
+
+	sf::Sprite sprite;
 
 	void ShootProjectile();
 	void HandleWASD();

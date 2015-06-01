@@ -4,9 +4,11 @@
 #include "Ship.h"
 #include "GlobalVariables.h"
 
-#define SPEED 2
+#define SPEED 5
 #define RotationSpeed 0.1
 #define DampenFactor 0.9
+#define PI 3.141593
+#define ShipImage "../Images/debug_ship.png"
 
 Ship::Ship()
 {
@@ -15,11 +17,14 @@ Ship::Ship()
 
 Ship::Ship(Player p)
 {
+	//Did I fuck up somewhere else?
 	if ( !(p == Player1 || p == Player2) )
 	{
 		throw new std::exception("ERROR: can not create a ship with a player that isn't Player1 or Player2");
 	}
+	//Set it so this ship knows what player it is
 	config = p;
+	//Set up some initial settings based on the player
 	switch (p)
 	{
 	case Player1:
@@ -29,6 +34,8 @@ Ship::Ship(Player p)
 		InitPlayer2Settings();
 		break;
 	}
+	//Set it to not move at all
+	velocity = 0;
 }
 
 Ship::~Ship()
@@ -74,20 +81,18 @@ void Ship::HandleWASD()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		velocity.y -= SPEED;
+		velocity = SPEED;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-		//velocity.x -= SPEED;
 		RotateShip(-RotationSpeed);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		//velocity.y += SPEED;
+		//apply a brake
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
-		//velocity.x += SPEED;
 		RotateShip(RotationSpeed);
 	}
 }
@@ -96,47 +101,67 @@ void Ship::HandleArrows()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		velocity.y -= SPEED;
+		
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		velocity.x -= SPEED;
+		
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		velocity.y += SPEED;
+		
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		velocity.x += SPEED;
+		
 	}
 }
 
 void Ship::InitPlayer1Settings()
 {
+	//set up the technical details
 	position = sf::Vector2f(w / 4, h / 2);
+	direction = sf::Vector2f(0, -1);
+	//load the sprite
+	sf::Texture texture;
+	if (!texture.loadFromFile(ShipImage))
+	{
+		printf("ERROR: can not load image %s\n", ShipImage);
+	}
+	sprite = sf::Sprite(texture);
+	sprite.setOrigin(sf::Vector2f(texture.getSize()) / 2.f);
 }
 
 void Ship::InitPlayer2Settings()
 {
+	//set up the technical details
 	position = sf::Vector2f(3 * w / 4, h / 2);
+	direction = sf::Vector2f(0, 1);
+	//load the sprite
+	sf::Texture texture;
+	if (!texture.loadFromFile(ShipImage))
+	{
+		printf("ERROR: can not load image %s\n", ShipImage);
+	}
+	sprite = sf::Sprite(texture);
+	sprite.setOrigin(sf::Vector2f(texture.getSize()) / 2.f);
 }
 
 void Ship::UpdatePosition()
 {
-	position += velocity;
-	velocity.x *= DampenFactor;
-	velocity.y *= DampenFactor;
+	position += direction * velocity;
+	velocity *= DampenFactor;
 }
 
 void Ship::RotateShip(float angle)
 {
-	velocity.x = velocity.x * cos(angle) - velocity.y * sin(angle);
-	velocity.y = velocity.x * sin(angle) + velocity.y * cos(angle);
+	direction.x = direction.x * cos(angle) - direction.y * sin(angle);
+	direction.y = direction.x * sin(angle) + direction.y * cos(angle);
 }
 
 void Ship::DrawShip()
 {
+	/*
 	sf::CircleShape ball;
 	ball.setRadius(10);
 	ball.setOutlineThickness(3);
@@ -145,4 +170,17 @@ void Ship::DrawShip()
 	ball.setOrigin(5, 5);
 	ball.setPosition(position);
 	window.draw(ball);
+	*/
+	//set the position and rotation
+	sprite.setPosition(position);
+	sf::Vector2f reference(1, 0);
+	float dot = direction.x * reference.x + direction.y * reference.y;
+	float det = direction.x * reference.y - direction.y * reference.x;
+	float angle = atan2(det, dot);
+	//convert to degrees
+	angle *= 180 / PI;
+	angle *= -1;
+	//set the sprite and draw
+	sprite.setRotation(angle);
+	window.draw(sprite);
 }
