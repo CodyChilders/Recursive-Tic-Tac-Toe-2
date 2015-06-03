@@ -8,6 +8,7 @@ public:
 	BlackHole(float x, float y);
 	BlackHole(sf::Vector2f pos);
 	~BlackHole();
+
 	void Draw();
 	sf::Vector2f GetPosition();
 	float GetStrength();

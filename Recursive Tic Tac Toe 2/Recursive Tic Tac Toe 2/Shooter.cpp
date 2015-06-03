@@ -9,8 +9,8 @@
 Shooter::Shooter()
 {
 	InitStars();
-	players[0] = Ship(Ship::Player1);
-	players[1] = Ship(Ship::Player2);
+	players[0] = new Ship(Ship::Player1);
+	players[1] = new Ship(Ship::Player2);
 	blackhole = BlackHole(static_cast<float>(w / 2), static_cast<float>(h / 2));
 }
 
@@ -21,8 +21,8 @@ Shooter::~Shooter()
 
 void Shooter::Update()
 {
-	players[0].PullTowardsPoint(blackhole);
-	players[1].PullTowardsPoint(blackhole);
+	players[0]->PullTowardsPoint(blackhole);
+	players[1]->PullTowardsPoint(blackhole);
 }
 
 void Shooter::Draw()
@@ -35,14 +35,14 @@ void Shooter::Draw()
 
 void Shooter::ProcessKeyboardEvent()
 {
-	players[0].ProcessKeyboardEvent();
-	players[1].ProcessKeyboardEvent();
+	players[0]->ProcessKeyboardEvent();
+	players[1]->ProcessKeyboardEvent();
 }
 
 void Shooter::ProcessControllerEvent()
 {
-	players[0].ProcessControllerEvent();
-	players[1].ProcessControllerEvent();
+	players[0]->ProcessControllerEvent();
+	players[1]->ProcessControllerEvent();
 }
 
 //This is the starfield that lies behind the game
@@ -71,6 +71,6 @@ void Shooter::InitStars()
 
 void Shooter::DrawShips()
 {
-	players[0].Draw();
-	players[1].Draw();
+	players[0]->Draw();
+	players[1]->Draw();
 }

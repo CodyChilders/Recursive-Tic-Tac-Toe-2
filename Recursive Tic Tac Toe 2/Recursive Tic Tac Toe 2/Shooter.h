@@ -17,7 +17,7 @@ public:
 
 private:
 	std::vector<sf::Vector2f> starLocations;
-	Ship players[2];
+	Ship* players[2];
 	BlackHole blackhole;
 
 	void DrawStars();
