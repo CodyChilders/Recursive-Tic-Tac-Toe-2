@@ -3,6 +3,7 @@
 
 #define BH BlackHole
 #define strength -1.0
+#define EventHorizon 5
 
 BH::BlackHole()
 {
@@ -44,4 +45,9 @@ sf::Vector2f BH::GetPosition()
 float BH::GetStrength()
 {
 	return strength;
+}
+
+float BH::GetEventHorizon()
+{
+	return EventHorizon;
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "BlackHole.h"
 
 class Ship
 {
@@ -13,7 +14,7 @@ public:
 	void Draw();
 	void ProcessKeyboardEvent();
 	void ProcessControllerEvent();
-	void PullTowardsPoint(sf::Vector2f point, float power);
+	void PullTowardsPoint(BlackHole bh);
 
 private:
 	Player config;

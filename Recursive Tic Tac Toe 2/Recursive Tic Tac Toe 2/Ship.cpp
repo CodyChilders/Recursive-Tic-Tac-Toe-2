@@ -2,6 +2,7 @@
 #include <cmath>
 #include <SFML/Graphics.hpp>
 #include "Ship.h"
+#include "BlackHole.h"
 #include "GlobalVariables.h"
 
 #define SPEED 5
@@ -73,15 +74,22 @@ void Ship::ProcessControllerEvent()
 
 }
 
-void Ship::PullTowardsPoint(sf::Vector2f point, float power)
+void Ship::PullTowardsPoint(BlackHole bh)
 {
 	//find the vector from this to that point
-	sf::Vector2f direction = position - point;
+	sf::Vector2f direction = position - bh.GetPosition();
 	//normalize
 	float length = sqrt( pow(direction.x, 2) + pow(direction.y, 2));
+	//see if it died from the black hole
+	if (length < bh.GetEventHorizon())
+	{
+		printf("Mark ship %d as dead - not implemented yet\n", config);
+		return;
+	}
+	//finish resolving the pull
 	direction /= length;
 	//scale up to the power
-	direction *= power;
+	direction *= bh.GetStrength();
 	//add to the position
 	position += direction;
 }

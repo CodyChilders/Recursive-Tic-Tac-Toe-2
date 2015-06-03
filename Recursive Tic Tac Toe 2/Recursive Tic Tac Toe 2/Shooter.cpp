@@ -21,8 +21,8 @@ Shooter::~Shooter()
 
 void Shooter::Update()
 {
-	players[0].PullTowardsPoint(blackhole.GetPosition(), blackhole.GetStrength());
-	players[1].PullTowardsPoint(blackhole.GetPosition(), blackhole.GetStrength());
+	players[0].PullTowardsPoint(blackhole);
+	players[1].PullTowardsPoint(blackhole);
 }
 
 void Shooter::Draw()
