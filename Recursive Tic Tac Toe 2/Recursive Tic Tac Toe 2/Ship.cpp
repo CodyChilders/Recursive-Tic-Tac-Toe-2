@@ -211,6 +211,8 @@ void Ship::DrawShip()
 	//convert to degrees
 	angle *= 180 / PI;
 	angle *= -1;
+	//rotate an extra 90 so it lines up with the vector
+	angle += 90;
 	//set the sprite and draw
 	sprite.setRotation(angle);
 	window.draw(sprite);

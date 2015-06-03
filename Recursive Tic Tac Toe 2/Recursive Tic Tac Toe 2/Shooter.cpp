@@ -16,7 +16,8 @@ Shooter::Shooter()
 
 Shooter::~Shooter()
 {
-
+	delete players[0];
+	delete players[1];
 }
 
 void Shooter::Update()
