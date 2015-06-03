@@ -11,6 +11,7 @@ Shooter::Shooter()
 	InitStars();
 	players[0] = Ship(Ship::Player1);
 	players[1] = Ship(Ship::Player2);
+	blackhole = BlackHole(static_cast<float>(w / 2), static_cast<float>(h / 2));
 }
 
 Shooter::~Shooter()
@@ -20,7 +21,8 @@ Shooter::~Shooter()
 
 void Shooter::Update()
 {
-
+	players[0].PullTowardsPoint(blackhole.GetPosition(), blackhole.GetStrength());
+	players[1].PullTowardsPoint(blackhole.GetPosition(), blackhole.GetStrength());
 }
 
 void Shooter::Draw()
@@ -28,6 +30,7 @@ void Shooter::Draw()
 	window.clear(sf::Color::Black);
 	DrawStars();
 	DrawShips();
+	blackhole.Draw();
 }
 
 void Shooter::ProcessKeyboardEvent()
@@ -57,10 +60,10 @@ void Shooter::DrawStars()
 
 void Shooter::InitStars()
 {
-	srand(time(nullptr));
+	srand(static_cast<unsigned int>(time(nullptr)));
 	for (int i = 0; i < NumberOfStars; i++)
 	{
-		sf::Vector2f pos(rand() % w, rand() % h);
+		sf::Vector2f pos(static_cast<float>(rand() % w), static_cast<float>(rand() % h));
 		starLocations.push_back(pos);
 	}
 	starLocations.shrink_to_fit();

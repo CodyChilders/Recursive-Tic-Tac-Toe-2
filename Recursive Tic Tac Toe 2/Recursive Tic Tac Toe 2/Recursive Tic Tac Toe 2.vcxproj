@@ -83,6 +83,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="BlackHole.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="BoardContainer.cpp" />
     <ClCompile Include="main.cpp" />
@@ -96,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="BlackHole.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardContainer.h" />
     <ClInclude Include="GlobalVariables.h" />

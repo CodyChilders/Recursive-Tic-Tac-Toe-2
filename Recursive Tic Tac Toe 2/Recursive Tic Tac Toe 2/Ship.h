@@ -13,6 +13,7 @@ public:
 	void Draw();
 	void ProcessKeyboardEvent();
 	void ProcessControllerEvent();
+	void PullTowardsPoint(sf::Vector2f point, float power);
 
 private:
 	Player config;

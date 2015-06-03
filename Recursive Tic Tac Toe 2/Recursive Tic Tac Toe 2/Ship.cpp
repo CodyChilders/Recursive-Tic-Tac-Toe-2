@@ -8,7 +8,7 @@
 #define RotationSpeed 0.1
 #define DampenFactor 0.9
 #define BrakePower 0.7
-#define PI 3.141593
+#define PI 3.141593f
 #define ShipImage "../Images/debug_ship.png"
 
 Ship::Ship()
@@ -71,6 +71,19 @@ void Ship::ProcessKeyboardEvent()
 void Ship::ProcessControllerEvent()
 {
 
+}
+
+void Ship::PullTowardsPoint(sf::Vector2f point, float power)
+{
+	//find the vector from this to that point
+	sf::Vector2f direction = position - point;
+	//normalize
+	float length = sqrt( pow(direction.x, 2) + pow(direction.y, 2));
+	direction /= length;
+	//scale up to the power
+	direction *= power;
+	//add to the position
+	position += direction;
 }
 
 void Ship::ShootProjectile()
