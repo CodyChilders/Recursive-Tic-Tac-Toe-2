@@ -103,7 +103,7 @@ void Ship::HandleWASD()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		velocity = SPEED;
+		velocity += SPEED;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
@@ -123,7 +123,7 @@ void Ship::HandleArrows()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		velocity = SPEED;
+		velocity += SPEED;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{

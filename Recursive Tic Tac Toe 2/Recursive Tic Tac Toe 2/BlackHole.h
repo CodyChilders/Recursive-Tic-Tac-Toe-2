@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "StormBlink.h"
 
 class BlackHole
 {
@@ -16,4 +17,7 @@ public:
 
 private:
 	sf::Vector2f position;
+	Effect* stormblink;
+
+	void LoadShader();
 };

@@ -100,12 +100,14 @@
     <ClInclude Include="BlackHole.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardContainer.h" />
+    <ClInclude Include="Effect.h" />
     <ClInclude Include="GlobalVariables.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="Shooter.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="StormBlink.h" />
     <ClInclude Include="TicTacToe.h" />
     <ClInclude Include="TTTHud.h" />
   </ItemGroup>

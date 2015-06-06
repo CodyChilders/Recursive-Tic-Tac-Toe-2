@@ -22,11 +22,12 @@ BH::BlackHole(sf::Vector2f pos)
 
 BH::~BlackHole()
 {
-
+	delete stormblink;
 }
 
 void BH::Draw()
 {
+	/*
 	sf::CircleShape ball;
 	ball.setRadius(10);
 	ball.setOutlineThickness(3);
@@ -35,6 +36,8 @@ void BH::Draw()
 	ball.setOrigin(5, 5);
 	ball.setPosition(position);
 	window.draw(ball);
+	*/
+	stormblink->update(0, w / 2, h / 2);
 }
 
 sf::Vector2f BH::GetPosition()
@@ -50,4 +53,9 @@ float BH::GetStrength()
 float BH::GetEventHorizon()
 {
 	return EventHorizon;
+}
+
+void BH::LoadShader()
+{
+	stormblink = new StormBlink();
 }
