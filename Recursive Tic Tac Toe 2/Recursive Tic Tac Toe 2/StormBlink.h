@@ -1,5 +1,9 @@
 #ifndef STORMBLINK_HPP
 #define STORMBLINK_HPP
+
+#define STORM "../Shaders/storm.vert"
+#define BLINK "../Shaders/blink.frag"
+
 /*************************************************
 * This entire class was taken from the SFML      *
 * example code                                   *
@@ -30,7 +34,7 @@ public:
 		}
 
 		// Load the shader
-		if (!m_shader.loadFromFile("resources/storm.vert", "resources/blink.frag"))
+		if (!m_shader.loadFromFile(STORM, BLINK))
 			return false;
 
 		return true;

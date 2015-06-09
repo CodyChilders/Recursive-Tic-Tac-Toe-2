@@ -6,7 +6,7 @@
 #include "GlobalVariables.h"
 
 #define SPEED 5
-#define RotationSpeed 0.1
+#define RotationSpeed 0.25
 #define DampenFactor 0.9
 #define BrakePower 0.7
 #define PI 3.141593f
@@ -55,6 +55,7 @@ void Ship::Draw()
 
 void Ship::ProcessKeyboardEvent()
 {
+	/*
 	if (config == Player1)
 	{
 		HandleWASD();
@@ -65,6 +66,18 @@ void Ship::ProcessKeyboardEvent()
 	}
 	else
 	{
+		throw new std::exception("ERROR: player config in the ship set to an invalid player");
+	}
+	*/
+	switch (config)
+	{
+	case Player1:
+		HandleWASD();
+		break;
+	case Player2:
+		HandleArrows();
+		break;
+	default:
 		throw new std::exception("ERROR: player config in the ship set to an invalid player");
 	}
 }
@@ -96,7 +109,7 @@ void Ship::PullTowardsPoint(BlackHole bh)
 
 void Ship::ShootProjectile()
 {
-
+	printf("Projectile shot by player %d\n", config);
 }
 
 void Ship::HandleWASD()
@@ -117,6 +130,10 @@ void Ship::HandleWASD()
 	{
 		RotateShip(RotationSpeed);
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		ShootProjectile();
+	}
 }
 
 void Ship::HandleArrows()
@@ -136,6 +153,10 @@ void Ship::HandleArrows()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		RotateShip(RotationSpeed);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+	{
+		ShootProjectile();
 	}
 }
 

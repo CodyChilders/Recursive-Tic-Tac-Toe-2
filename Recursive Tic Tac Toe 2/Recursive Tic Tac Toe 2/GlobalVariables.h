@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "StateMachine.h"
 #include "AudioManager.h"
+#include "Effect.h"
 
 //the window instance
 extern sf::RenderWindow window;
@@ -17,3 +18,4 @@ extern int mouseY;
 extern StateMachine* states;
 //sound
 extern AudioManager* audio;
+

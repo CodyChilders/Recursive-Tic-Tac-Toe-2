@@ -88,6 +88,8 @@
     <ClCompile Include="BoardContainer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="Shooter.cpp" />
     <ClCompile Include="State.cpp" />
@@ -103,6 +105,8 @@
     <ClInclude Include="Effect.h" />
     <ClInclude Include="GlobalVariables.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="Projectile.h" />
+    <ClInclude Include="ProjectileManager.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="Shooter.h" />
     <ClInclude Include="State.h" />

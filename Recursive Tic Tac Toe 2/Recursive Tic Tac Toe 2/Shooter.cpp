@@ -2,6 +2,7 @@
 #include <ctime>
 #include "Shooter.h"
 #include "GlobalVariables.h"
+#include "ProjectileManager.h"
 
 #define NumberOfStars 100
 #define StarSize 1
@@ -12,16 +13,19 @@ Shooter::Shooter()
 	players[0] = new Ship(Ship::Player1);
 	players[1] = new Ship(Ship::Player2);
 	blackhole = BlackHole(static_cast<float>(w / 2), static_cast<float>(h / 2));
+	pm = new ProjectileManager();
 }
 
 Shooter::~Shooter()
 {
 	delete players[0];
 	delete players[1];
+	delete pm;
 }
 
 void Shooter::Update()
 {
+	pm->Update();
 	players[0]->PullTowardsPoint(blackhole);
 	players[1]->PullTowardsPoint(blackhole);
 }
@@ -29,9 +33,10 @@ void Shooter::Update()
 void Shooter::Draw()
 {
 	window.clear(sf::Color::Black);
-	DrawStars();
-	DrawShips();
 	blackhole.Draw();
+	DrawStars();
+	pm->Draw();
+	DrawShips();
 }
 
 void Shooter::ProcessKeyboardEvent()

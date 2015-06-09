@@ -8,36 +8,43 @@
 BH::BlackHole()
 {
 	position = sf::Vector2f(static_cast<float>(w / 2), static_cast<float>(h / 2));
+	LoadShader();
 }
 
 BH::BlackHole(float x, float y)
 {
 	position = sf::Vector2f(x, y);
+	LoadShader();
 }
 
 BH::BlackHole(sf::Vector2f pos)
 {
 	position = pos;
+	LoadShader();
 }
 
 BH::~BlackHole()
 {
-	delete stormblink;
+	//if (stormblink)
+	//	delete stormblink;
 }
 
 void BH::Draw()
 {
-	/*
+	stormblink->update(0, w / 2, h / 2);
+	window.draw(*stormblink);
+	
+	float size = 25;
 	sf::CircleShape ball;
-	ball.setRadius(10);
+	ball.setRadius(size);
 	ball.setOutlineThickness(3);
 	ball.setOutlineColor(sf::Color::Black);
 	ball.setFillColor(sf::Color::White);
-	ball.setOrigin(5, 5);
+	ball.setOrigin(size / 2, size / 2);
 	ball.setPosition(position);
 	window.draw(ball);
-	*/
-	stormblink->update(0, w / 2, h / 2);
+
+	
 }
 
 sf::Vector2f BH::GetPosition()
@@ -58,4 +65,5 @@ float BH::GetEventHorizon()
 void BH::LoadShader()
 {
 	stormblink = new StormBlink();
+	stormblink->load();
 }

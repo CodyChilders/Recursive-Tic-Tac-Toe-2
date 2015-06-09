@@ -12,7 +12,7 @@
 #include <SFML/Graphics.hpp>
 #include <cassert>
 #include <string>
-
+#include "GlobalVariables.h"
 
 ////////////////////////////////////////////////////////////
 // Base class for effects
@@ -27,7 +27,7 @@ public:
 
 	static void setFont(const sf::Font& font)
 	{
-		s_font = &font;
+		//s_font = &font;
 	}
 
 	const std::string& getName() const
@@ -71,8 +71,9 @@ protected:
 
 	static const sf::Font& getFont()
 	{
-		assert(s_font != NULL);
-		return *s_font;
+		//assert(s_font != NULL);
+		//return *s_font;
+		throw new std::exception("Remove font shit so I can work");
 	}
 
 private:
@@ -87,7 +88,9 @@ private:
 	std::string m_name;
 	bool m_isLoaded;
 
-	static const sf::Font* s_font;
+	//static const sf::Font* s_font;// = nullptr;
 };
 
-#endif // EFFECT_HPP
+//const sf::Font* Effect::s_font = nullptr;
+
+#endif // EFFECT_H

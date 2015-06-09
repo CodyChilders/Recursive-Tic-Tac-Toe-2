@@ -4,6 +4,7 @@
 #include "State.h"
 #include "Ship.h"
 #include "BlackHole.h"
+#include "ProjectileManager.h"
 
 class Shooter : public State
 {
@@ -19,6 +20,7 @@ private:
 	std::vector<sf::Vector2f> starLocations;
 	Ship* players[2];
 	BlackHole blackhole;
+	ProjectileManager* pm;
 
 	void DrawStars();
 	void InitStars();

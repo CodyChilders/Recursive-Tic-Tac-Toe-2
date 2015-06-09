@@ -15,6 +15,9 @@ public:
 	void ProcessKeyboardEvent();
 	void ProcessControllerEvent();
 	void PullTowardsPoint(BlackHole bh);
+	sf::Vector2f GetPosition() { return position; }
+	sf::Vector2f GetDirection() { return direction; }
+	Player GetPlayer() { return config; }
 
 private:
 	Player config;
