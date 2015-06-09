@@ -22,9 +22,22 @@ void PM::Update()
 {
 	for (std::list<Projectile*>::iterator it = activeProjectiles.begin(); it != activeProjectiles.end(); ++it)
 	{
-		printf("DEBUG: ProjectileManager.cpp is not checking if this projectile should be deleted\n");
+		//printf("DEBUG: ProjectileManager.cpp is not checking if this projectile should be deleted\n");
+		if ( !( (*it)->IsActive() ) )
+		{
+			std::list<Projectile*>	::iterator previous = it++;
+			activeProjectiles.erase(previous);
+			//decide if it should continue or break this loop
+			//continue if there is more stuff in the list
+			//break if it is the end of the list
+			if (it == activeProjectiles.end())
+				break;
+			else
+				continue;
+		}
 		(*it)->Update();
 	}
+	printf("Projectiles contains %d elements\n", activeProjectiles.size());
 }
 
 void PM::Draw()
@@ -35,12 +48,8 @@ void PM::Draw()
 	}
 }
 
-void PM::FireProjectile(Ship* s)
+void PM::FireProjectile(sf::Vector2f pos, sf::Vector2f dir, int plr)
 {
-	Projectile* newProjectile = nullptr;
-	sf::Vector2f pos = s->GetPosition();
-	sf::Vector2f dir = s->GetDirection();
-	int plr = s->GetPlayer();
-	newProjectile = new Projectile(pos, dir, plr);
+	Projectile* newProjectile = new Projectile(pos, dir, plr);
 	activeProjectiles.push_back(newProjectile);
 }

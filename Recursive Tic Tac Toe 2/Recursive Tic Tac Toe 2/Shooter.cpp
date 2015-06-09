@@ -35,20 +35,21 @@ void Shooter::Draw()
 	window.clear(sf::Color::Black);
 	blackhole.Draw();
 	DrawStars();
+	pm->Update();
 	pm->Draw();
 	DrawShips();
 }
 
 void Shooter::ProcessKeyboardEvent()
 {
-	players[0]->ProcessKeyboardEvent();
-	players[1]->ProcessKeyboardEvent();
+	players[0]->ProcessKeyboardEvent(pm);
+	players[1]->ProcessKeyboardEvent(pm);
 }
 
 void Shooter::ProcessControllerEvent()
 {
-	players[0]->ProcessControllerEvent();
-	players[1]->ProcessControllerEvent();
+	players[0]->ProcessControllerEvent(pm);
+	players[1]->ProcessControllerEvent(pm);
 }
 
 //This is the starfield that lies behind the game

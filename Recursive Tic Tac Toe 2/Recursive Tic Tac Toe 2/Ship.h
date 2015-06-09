@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "BlackHole.h"
+#include "ProjectileManager.h"
 
 class Ship
 {
@@ -12,8 +13,8 @@ public:
 	~Ship();
 	void Update();
 	void Draw();
-	void ProcessKeyboardEvent();
-	void ProcessControllerEvent();
+	void ProcessKeyboardEvent(ProjectileManager* pm);
+	void ProcessControllerEvent(ProjectileManager* pm);
 	void PullTowardsPoint(BlackHole bh);
 	sf::Vector2f GetPosition() { return position; }
 	sf::Vector2f GetDirection() { return direction; }
@@ -28,9 +29,9 @@ private:
 	sf::Sprite sprite;
 	sf::Texture texture;
 
-	void ShootProjectile();
-	void HandleWASD();
-	void HandleArrows();
+	void ShootProjectile(ProjectileManager* pm);
+	void HandleWASD(ProjectileManager* pm);
+	void HandleArrows(ProjectileManager* pm);
 	void InitPlayer1Settings();
 	void InitPlayer2Settings();
 	void UpdatePosition();

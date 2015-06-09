@@ -4,6 +4,7 @@
 #include "Ship.h"
 #include "BlackHole.h"
 #include "GlobalVariables.h"
+#include "ProjectileManager.h"
 
 #define SPEED 5
 #define RotationSpeed 0.25
@@ -53,36 +54,22 @@ void Ship::Draw()
 	DrawShip();
 }
 
-void Ship::ProcessKeyboardEvent()
+void Ship::ProcessKeyboardEvent(ProjectileManager* pm)
 {
-	/*
-	if (config == Player1)
-	{
-		HandleWASD();
-	}
-	else if (config == Player2)
-	{
-		HandleArrows();
-	}
-	else
-	{
-		throw new std::exception("ERROR: player config in the ship set to an invalid player");
-	}
-	*/
 	switch (config)
 	{
 	case Player1:
-		HandleWASD();
+		HandleWASD(pm);
 		break;
 	case Player2:
-		HandleArrows();
+		HandleArrows(pm);
 		break;
 	default:
 		throw new std::exception("ERROR: player config in the ship set to an invalid player");
 	}
 }
 
-void Ship::ProcessControllerEvent()
+void Ship::ProcessControllerEvent(ProjectileManager* pm)
 {
 
 }
@@ -107,12 +94,13 @@ void Ship::PullTowardsPoint(BlackHole bh)
 	position += direction;
 }
 
-void Ship::ShootProjectile()
+void Ship::ShootProjectile(ProjectileManager* pm)
 {
 	printf("Projectile shot by player %d\n", config);
+	pm->FireProjectile(position, direction, config);
 }
 
-void Ship::HandleWASD()
+void Ship::HandleWASD(ProjectileManager* pm)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
@@ -132,11 +120,11 @@ void Ship::HandleWASD()
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
-		ShootProjectile();
+		ShootProjectile(pm);
 	}
 }
 
-void Ship::HandleArrows()
+void Ship::HandleArrows(ProjectileManager* pm)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
@@ -156,7 +144,7 @@ void Ship::HandleArrows()
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 	{
-		ShootProjectile();
+		ShootProjectile(pm);
 	}
 }
 

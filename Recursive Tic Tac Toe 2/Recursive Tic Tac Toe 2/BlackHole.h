@@ -18,6 +18,7 @@ public:
 private:
 	sf::Vector2f position;
 	Effect* stormblink;
+	int framesExisted; //used for the black hole pulsation
 
 	void LoadShader();
 };

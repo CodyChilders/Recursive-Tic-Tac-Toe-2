@@ -2,7 +2,6 @@
 #include <list>
 #include <SFML/Graphics.hpp>
 #include "Projectile.h"
-#include "Ship.h"
 
 class ProjectileManager
 {
@@ -11,7 +10,7 @@ public:
 	~ProjectileManager();
 	void Update();
 	void Draw();
-	void FireProjectile(Ship* s);
+	void FireProjectile(sf::Vector2f pos, sf::Vector2f dir, int plr);
 
 private:
 	std::list<Projectile*> activeProjectiles;

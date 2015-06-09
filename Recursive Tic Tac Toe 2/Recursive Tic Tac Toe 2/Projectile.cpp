@@ -25,11 +25,26 @@ Projectile::~Projectile()
 void Projectile::Update()
 {
 	position += velocity;
+	//check if this needs to be deleted because it went of the screen
+	if (position.x < 0 ||
+		position.x > w ||
+		position.y < 0 ||
+		position.y > h)
+	{
+		active = false;
+	}
 }
 
 void Projectile::Draw()
 {
-
+	sf::CircleShape ball;
+	ball.setRadius(4);
+	ball.setOutlineThickness(3);
+	ball.setOutlineColor(sf::Color::Blue);
+	ball.setFillColor(sf::Color::Red);
+	ball.setOrigin(5, 5);
+	ball.setPosition(position);
+	window.draw(ball);
 }
 
 void Projectile::PullTowardsPoint(BlackHole bh)
