@@ -1,13 +1,16 @@
+/*************************************************
+* This entire class was taken from the SFML      *
+* example code and slightly modified by me       *
+*************************************************/
+
 #ifndef STORMBLINK_HPP
 #define STORMBLINK_HPP
 
+#include "GlobalVariables.h"
 #define STORM "../Shaders/storm.vert"
 #define BLINK "../Shaders/blink.frag"
+#define NumberOfStars 100
 
-/*************************************************
-* This entire class was taken from the SFML      *
-* example code                                   *
-*************************************************/
 #include "Effect.h"
 
 class StormBlink : public Effect
@@ -23,13 +26,16 @@ public:
 	{
 		// Create the points
 		m_points.setPrimitiveType(sf::Points);
-		for (int i = 0; i < 40000; ++i)
+		for (int i = 0; i < NumberOfStars; ++i)
 		{
-			float x = static_cast<float>(std::rand() % 800);
-			float y = static_cast<float>(std::rand() % 600);
-			sf::Uint8 r = std::rand() % 255;
-			sf::Uint8 g = std::rand() % 255;
-			sf::Uint8 b = std::rand() % 255;
+			//float x = static_cast<float>(std::rand() % 800);
+			//float y = static_cast<float>(std::rand() % 600);
+			//sf::Uint8 r = std::rand() % 255;
+			//sf::Uint8 g = std::rand() % 255;
+			//sf::Uint8 b = std::rand() % 255;
+			float x = static_cast<float>(std::rand() % w);
+			float y = static_cast<float>(std::rand() % h);
+			int r = 255, g = 255, b = 255;
 			m_points.append(sf::Vertex(sf::Vector2f(x, y), sf::Color(r, g, b)));
 		}
 
