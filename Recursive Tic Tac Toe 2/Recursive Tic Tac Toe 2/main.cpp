@@ -71,10 +71,12 @@ void Draw()
 		//for framerate limiting
 		time_t timeNow = time(nullptr);
 		time_t delta = timeNow - timeAtStart;
-		int sleepTime = static_cast<int>(msPerFrame - delta);
+		int sleepTime = static_cast<int>(msPerFrame) - static_cast<int>(delta);
 		//printf("Slept thread for %d ms\n", sleepTime);
 		if (sleepTime > 0)
+		{
 			Sleep(sleepTime);
+		}
 	}
 }
 
