@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "BoardContainer.h"
 #include "GlobalVariables.h"
+#include "Shooter.h"
 
 #define BC BoardContainer
 #define and &&
@@ -208,9 +209,13 @@ BoardContainer_CheckForWin_SkipFurtherChecking:
 	//if it exits the loop but there were 9 moves performed, it is a cats-game.  Reset
 	if (movesPerformed == 9)
 	{
+		/*
 		//TODO switch to a non-solved game mode in here to decide who wins.
 		CreateNewBoard();
 		movesPerformed = 0;
+		*/
+		contestedBoard = this;
+		states->PushState(new Shooter());
 		return;
 	}
 }

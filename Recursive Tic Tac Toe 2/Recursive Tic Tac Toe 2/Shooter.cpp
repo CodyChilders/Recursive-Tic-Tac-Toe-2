@@ -112,7 +112,11 @@ void Shooter::CheckProjectileCollisions()
 void Shooter::SetWinningPlayer(int player)
 {
 	//printf("Player %d has won\n", player);
-	contestedBoard->SetWinner(player);
+	if (contestedBoard)
+	{
+		contestedBoard->SetWinner(player);
+		contestedBoard = nullptr;
+	}
 	try
 	{
 		states->PopState();
