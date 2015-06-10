@@ -40,31 +40,43 @@ void Projectile::Draw()
 	sf::CircleShape ball;
 	ball.setRadius(4);
 	ball.setOutlineThickness(3);
-	ball.setOutlineColor(sf::Color::Blue);
-	ball.setFillColor(sf::Color::Red);
+	if (owner == 1)
+	{
+		ball.setOutlineColor(sf::Color::Red);
+		ball.setFillColor(sf::Color::Red);
+	}
+	else
+	{
+		ball.setOutlineColor(sf::Color::Blue);
+		ball.setFillColor(sf::Color::Blue);
+	}
 	ball.setOrigin(5, 5);
 	ball.setPosition(position);
 	window.draw(ball);
 }
 
-void Projectile::PullTowardsPoint(BlackHole bh)
+void Projectile::PullTowardsPoint(BlackHole* bh)
 {
 	//find the vector from this to that point
-	sf::Vector2f direction = position - bh.GetPosition();
-	//normalize
+	sf::Vector2f direction = position - bh->GetPosition();
+	//get the length of the vector for normalizing
 	float length = sqrt(pow(direction.x, 2) + pow(direction.y, 2));
 	//see if it died from the black hole
-	if (length < bh.GetEventHorizon())
+	if (length < bh->GetEventHorizon())
 	{
-		printf("Mark projectile shot by player %d as dead - not implemented yet\n", owner);
+		active = false;
 		return;
 	}
-	//finish resolving the pull
+	//finish normalizing
 	direction /= length;
+	//modify the velocity vector to be the normal of the ray from this to the black hole
+	float angle = 90.0f;
+	direction.x = direction.x * cos(angle) - direction.y * sin(angle);
+	direction.y = direction.x * sin(angle) + direction.y * cos(angle);
 	//scale up to the power
-	direction *= bh.GetStrength();
-	//add to the position
-	position += direction;
+	direction *= bh->GetStrength();
+	//make this the new velocity
+	velocity = direction; // misleading variable names, but direction has been turned into velocity
 }
 
 sf::Vector2f Projectile::GetPosition()

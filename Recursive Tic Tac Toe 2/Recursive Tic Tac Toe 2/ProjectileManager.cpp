@@ -1,5 +1,4 @@
 #include "ProjectileManager.h"
-#include "Ship.h"
 
 #define PM ProjectileManager
 
@@ -18,14 +17,13 @@ PM::~ProjectileManager()
 	}
 }
 
-void PM::Update()
+void PM::Update(BlackHole* bh)
 {
 	for (std::list<Projectile*>::iterator it = activeProjectiles.begin(); it != activeProjectiles.end(); ++it)
 	{
-		//printf("DEBUG: ProjectileManager.cpp is not checking if this projectile should be deleted\n");
 		if ( !( (*it)->IsActive() ) )
 		{
-			std::list<Projectile*>	::iterator previous = it++;
+			std::list<Projectile*>::iterator previous = it++;
 			activeProjectiles.erase(previous);
 			//decide if it should continue or break this loop
 			//continue if there is more stuff in the list
@@ -36,8 +34,9 @@ void PM::Update()
 				continue;
 		}
 		(*it)->Update();
+		(*it)->PullTowardsPoint(bh);
 	}
-	printf("Projectiles contains %d elements\n", activeProjectiles.size());
+	//printf("Projectiles contains %d elements\n", activeProjectiles.size());
 }
 
 void PM::Draw()
@@ -50,6 +49,5 @@ void PM::Draw()
 
 void PM::FireProjectile(sf::Vector2f pos, sf::Vector2f dir, int plr)
 {
-	Projectile* newProjectile = new Projectile(pos, dir, plr);
-	activeProjectiles.push_back(newProjectile);
+	activeProjectiles.push_back(new Projectile(pos, dir, plr));
 }

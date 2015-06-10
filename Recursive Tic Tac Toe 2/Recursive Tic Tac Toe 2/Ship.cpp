@@ -96,7 +96,7 @@ void Ship::PullTowardsPoint(BlackHole bh)
 
 void Ship::ShootProjectile(ProjectileManager* pm)
 {
-	printf("Projectile shot by player %d\n", config);
+	//printf("Projectile shot by player %d\n", config);
 	pm->FireProjectile(position, direction, config);
 }
 

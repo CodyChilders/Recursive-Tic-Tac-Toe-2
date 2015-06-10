@@ -10,7 +10,7 @@ public:
 	~Projectile();
 	void Update();
 	void Draw();
-	void PullTowardsPoint(BlackHole bh);
+	void PullTowardsPoint(BlackHole* bh);
 	sf::Vector2f GetPosition();
 	sf::Vector2f GetVelocity();
 	bool IsActive();

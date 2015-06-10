@@ -25,7 +25,7 @@ Shooter::~Shooter()
 
 void Shooter::Update()
 {
-	pm->Update();
+	pm->Update(&blackhole);
 	players[0]->PullTowardsPoint(blackhole);
 	players[1]->PullTowardsPoint(blackhole);
 }
@@ -35,7 +35,7 @@ void Shooter::Draw()
 	window.clear(sf::Color::Black);
 	blackhole.Draw();
 	DrawStars();
-	pm->Update();
+	//pm->Update( & blackhole);
 	pm->Draw();
 	DrawShips();
 }
