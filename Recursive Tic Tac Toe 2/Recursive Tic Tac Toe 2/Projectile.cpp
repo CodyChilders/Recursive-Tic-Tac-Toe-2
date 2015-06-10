@@ -76,7 +76,7 @@ void Projectile::PullTowardsPoint(BlackHole* bh)
 	//scale up to the power
 	direction *= bh->GetStrength();
 	//make this the new velocity
-	velocity = direction; // misleading variable names, but direction has been turned into velocity
+	velocity -= direction; // misleading variable names, but direction has been turned into velocity
 }
 
 sf::Vector2f Projectile::GetPosition()
