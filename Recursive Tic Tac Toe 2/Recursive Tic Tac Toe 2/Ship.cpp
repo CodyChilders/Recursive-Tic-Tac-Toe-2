@@ -12,7 +12,7 @@
 #define BrakePower 0.7
 #define PI 3.141593f
 #define ShipImage "../Images/debug_ship.png"
-#define ShipHitCircleRadius 3.0f
+#define ShipHitCircleRadius 8.0f
 
 Ship::Ship()
 {
@@ -40,6 +40,8 @@ Ship::Ship(Player p)
 	}
 	//Set it to not move at all
 	velocity = 0;
+	//it is alive
+	isDead = false;
 }
 
 Ship::~Ship()
@@ -84,7 +86,7 @@ void Ship::PullTowardsPoint(BlackHole* bh)
 	//see if it died from the black hole
 	if (length < bh->GetEventHorizon())
 	{
-		//printf("Mark ship %d as dead - not implemented yet\n", config);
+		isDead = true;
 		return;
 	}
 	//finish resolving the pull

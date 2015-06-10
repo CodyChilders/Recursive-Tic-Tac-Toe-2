@@ -2,7 +2,7 @@
 #include "Projectile.h"
 #include "BlackHole.h"
 
-#define speed 8.0f
+#define speed 15.0f
 #define maxProjectileLifetime 150
 Projectile::Projectile()
 {

@@ -20,12 +20,14 @@ public:
 	sf::Vector2f GetDirection() { return direction; }
 	Player GetPlayer() { return config; }
 	bool ContainsPoint(sf::Vector2f otherPosition);
+	bool IsDead() { return isDead; }
 
 private:
 	Player config;
 	sf::Vector2f position;
 	sf::Vector2f direction;
 	float velocity;
+	bool isDead;
 
 	sf::Sprite sprite;
 	sf::Texture texture;

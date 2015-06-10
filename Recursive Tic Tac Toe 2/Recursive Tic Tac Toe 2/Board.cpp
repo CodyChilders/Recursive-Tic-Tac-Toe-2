@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "Board.h"
 #include "GlobalVariables.h"
+#include "Shooter.h"
 
 #define and &&
 #define or ||
@@ -244,8 +245,12 @@ Board_CheckForWin_SkipFurtherChecking:
 	//if it exits the loop but 9 moves were performed, it is a cats-game.
 	if (movesPerformed == 9)
 	{
+		/*
 		CreateNewBoard();
 		movesPerformed = 0;
+		*/
+		contestedBoard = this;
+		states->PushState(new Shooter());
 		return;
 	}
 }
@@ -285,4 +290,10 @@ void Board::DrawPieces()
 			}
 		}
 	}
+}
+
+void Board::SetWinner(int player)
+{
+	movesPerformed = 9;
+	winner = player;
 }

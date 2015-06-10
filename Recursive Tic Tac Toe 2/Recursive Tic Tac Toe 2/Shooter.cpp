@@ -29,6 +29,7 @@ void Shooter::Update()
 	players[0]->PullTowardsPoint(&blackhole);
 	players[1]->PullTowardsPoint(&blackhole);
 	CheckProjectileCollisions();
+	CheckIfShipsAreDead();
 }
 
 void Shooter::Draw()
@@ -95,15 +96,44 @@ void Shooter::CheckProjectileCollisions()
 			{
 				//mark the other player as having won
 				//printf("Player %d was hit\n", i + 1);
-				if (i == 0) //Mark player 2 as dead
+				if (i == 0) //Mark player 1 as dead
 				{
-					printf("Player 2 is dead");
+					SetWinningPlayer(2);
 				}
-				else //Mark player 1 as dead
+				else //Mark player 2 as dead
 				{
-					printf("Player 1 is dead");
+					SetWinningPlayer(1);
 				}
 			}
 		}
+	}
+}
+
+void Shooter::SetWinningPlayer(int player)
+{
+	//printf("Player %d has won\n", player);
+	contestedBoard->SetWinner(player);
+	try
+	{
+		states->PopState();
+	}
+	catch (std::exception e)
+	{
+		//This probably means I'm testing and there isn't a state under this.  Just ignore
+		return;
+	}
+}
+
+void Shooter::CheckIfShipsAreDead()
+{
+	if (players[0]->IsDead())
+	{
+		SetWinningPlayer(2);
+		return;
+	}
+	if (players[1]->IsDead())
+	{
+		SetWinningPlayer(1);
+		return;
 	}
 }

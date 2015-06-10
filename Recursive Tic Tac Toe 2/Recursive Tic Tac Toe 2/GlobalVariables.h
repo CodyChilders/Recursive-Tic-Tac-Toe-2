@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "StateMachine.h"
 #include "AudioManager.h"
+#include "Board.h"
 
 //the window instance
 extern sf::RenderWindow window;
@@ -17,3 +18,5 @@ extern int mouseY;
 extern StateMachine* states;
 //sound
 extern AudioManager* audio;
+//For resolving between the 2 main game states
+extern Board* contestedBoard;

@@ -26,4 +26,6 @@ private:
 	void InitStars();
 	void DrawShips();
 	void CheckProjectileCollisions();
+	void SetWinningPlayer(int player);
+	void CheckIfShipsAreDead();
 };

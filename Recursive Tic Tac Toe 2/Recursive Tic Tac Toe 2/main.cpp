@@ -8,6 +8,7 @@
 #include "GlobalVariables.h"
 #include "StateMachine.h"
 #include "Shooter.h"
+#include "Board.h"
 
 int w = 1150, h = 950;
 
@@ -16,6 +17,7 @@ AudioManager* audio;
 
 int mouseX = 0,
 	mouseY = 0;
+Board* contestedBoard = nullptr;
 bool playerOnesTurn = true;
 bool freshBoard = true;
 sf::RenderWindow window(sf::VideoMode(w, h), "Recursive Tic-Tac-Toe 2");
@@ -27,10 +29,10 @@ void Setup()
 {
 	//TicTacToe* ttt = new TicTacToe();
 	//states = new StateMachine(ttt);
-	//MainMenu* mm = new MainMenu();
-	//states = new StateMachine(mm);
-	Shooter* s = new Shooter();
-	states = new StateMachine(s);
+	MainMenu* mm = new MainMenu();
+	states = new StateMachine(mm);
+	//Shooter* s = new Shooter();
+	//states = new StateMachine(s);
 
 	audio = new AudioManager();
 }

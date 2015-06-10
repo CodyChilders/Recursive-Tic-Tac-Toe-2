@@ -19,6 +19,7 @@ public:
 	virtual void ProcessMouseEvent();
 	virtual void Draw();
 	int GetWinner();
+	void SetWinner(int player); //This is called by the shooter
 
 protected:
 	int x, //x coordinate of the top left corner
