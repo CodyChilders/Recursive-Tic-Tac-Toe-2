@@ -12,6 +12,7 @@
 #define BrakePower 0.7
 #define PI 3.141593f
 #define ShipImage "../Images/debug_ship.png"
+#define ShipHitCircleRadius 3.0f
 
 Ship::Ship()
 {
@@ -74,24 +75,37 @@ void Ship::ProcessControllerEvent(ProjectileManager* pm)
 
 }
 
-void Ship::PullTowardsPoint(BlackHole bh)
+void Ship::PullTowardsPoint(BlackHole* bh)
 {
 	//find the vector from this to that point
-	sf::Vector2f direction = position - bh.GetPosition();
+	sf::Vector2f direction = position - bh->GetPosition();
 	//normalize
 	float length = sqrt( pow(direction.x, 2) + pow(direction.y, 2));
 	//see if it died from the black hole
-	if (length < bh.GetEventHorizon())
+	if (length < bh->GetEventHorizon())
 	{
-		printf("Mark ship %d as dead - not implemented yet\n", config);
+		//printf("Mark ship %d as dead - not implemented yet\n", config);
 		return;
 	}
 	//finish resolving the pull
 	direction /= length;
 	//scale up to the power
-	direction *= bh.GetStrength();
+	direction *= bh->GetStrength();
 	//add to the position
 	position += direction;
+}
+
+bool Ship::ContainsPoint(sf::Vector2f otherPosition)
+{
+	float distance = std::sqrt(std::pow(otherPosition.x - position.x, 2) + std::pow(otherPosition.y - position.y, 2));
+	if (distance <= ShipHitCircleRadius)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void Ship::ShootProjectile(ProjectileManager* pm)

@@ -25,4 +25,5 @@ private:
 	void DrawStars();
 	void InitStars();
 	void DrawShips();
+	void CheckProjectileCollisions();
 };

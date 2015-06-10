@@ -15,10 +15,11 @@ public:
 	void Draw();
 	void ProcessKeyboardEvent(ProjectileManager* pm);
 	void ProcessControllerEvent(ProjectileManager* pm);
-	void PullTowardsPoint(BlackHole bh);
+	void PullTowardsPoint(BlackHole* bh);
 	sf::Vector2f GetPosition() { return position; }
 	sf::Vector2f GetDirection() { return direction; }
 	Player GetPlayer() { return config; }
+	bool ContainsPoint(sf::Vector2f otherPosition);
 
 private:
 	Player config;

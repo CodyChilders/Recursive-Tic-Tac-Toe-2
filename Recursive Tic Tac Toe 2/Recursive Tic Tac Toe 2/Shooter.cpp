@@ -26,8 +26,9 @@ Shooter::~Shooter()
 void Shooter::Update()
 {
 	pm->Update(&blackhole);
-	players[0]->PullTowardsPoint(blackhole);
-	players[1]->PullTowardsPoint(blackhole);
+	players[0]->PullTowardsPoint(&blackhole);
+	players[1]->PullTowardsPoint(&blackhole);
+	CheckProjectileCollisions();
 }
 
 void Shooter::Draw()
@@ -80,4 +81,29 @@ void Shooter::DrawShips()
 {
 	players[0]->Draw();
 	players[1]->Draw();
+}
+
+void Shooter::CheckProjectileCollisions()
+{
+	std::list<Projectile*> activeProjectiles = pm->GetActiveProjectiles();
+	for (std::list<Projectile*>::iterator it = activeProjectiles.begin(); it != activeProjectiles.end(); ++it)
+	{
+		sf::Vector2f position = (*it)->GetPosition();
+		for (int i = 0; i <= 1; i++) //Check both the players to see if they have been hit
+		{
+			if (players[i]->ContainsPoint(position))
+			{
+				//mark the other player as having won
+				//printf("Player %d was hit\n", i + 1);
+				if (i == 0) //Mark player 2 as dead
+				{
+					printf("Player 2 is dead");
+				}
+				else //Mark player 1 as dead
+				{
+					printf("Player 1 is dead");
+				}
+			}
+		}
+	}
 }
