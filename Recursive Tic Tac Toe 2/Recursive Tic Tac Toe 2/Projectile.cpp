@@ -3,10 +3,11 @@
 #include "BlackHole.h"
 
 #define speed 8.0f
-
+#define maxProjectileLifetime 150
 Projectile::Projectile()
 {
 	active = true;
+	framesSinceBirth = 0;
 }
 
 Projectile::Projectile(sf::Vector2f shipPosition, sf::Vector2f direction, int player)
@@ -15,6 +16,7 @@ Projectile::Projectile(sf::Vector2f shipPosition, sf::Vector2f direction, int pl
 	velocity = direction * speed;
 	owner = player;
 	active = true;
+	framesSinceBirth = 0;
 }
 
 Projectile::~Projectile()
@@ -22,16 +24,27 @@ Projectile::~Projectile()
 
 }
 
-void Projectile::Update()
+void Projectile::Update(BlackHole* bh)
 {
+	//actual update information
 	position += velocity;
-	//check if this needs to be deleted because it went of the screen
-	if (position.x < 0 ||
+	//see if it fell into the black hole
+	float distanceToBH = std::sqrt(std::pow(bh->GetPosition().x - position.x, 2) + std::pow(bh->GetPosition().y - position.y, 2));
+	//all the places it could have failed
+	
+	if (//check if this needs to be deleted because it went of the screen
+		position.x < 0 ||
 		position.x > w ||
 		position.y < 0 ||
-		position.y > h)
+		position.y > h ||
+		//check if it needs to be deleted because it has been alive too long
+		framesSinceBirth++ > maxProjectileLifetime ||
+		//check if it got sucked into the black hole
+		distanceToBH <= bh->GetEventHorizon()
+	   )
 	{
 		active = false;
+		return;
 	}
 }
 
@@ -74,7 +87,7 @@ void Projectile::PullTowardsPoint(BlackHole* bh)
 	direction.x = direction.x * cos(angle) - direction.y * sin(angle);
 	direction.y = direction.x * sin(angle) + direction.y * cos(angle);
 	//scale up to the power
-	direction *= bh->GetStrength();
+	direction *= -0.5f;// bh->GetStrength();
 	//make this the new velocity
 	velocity -= direction; // misleading variable names, but direction has been turned into velocity
 }

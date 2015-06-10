@@ -8,7 +8,7 @@ public:
 	Projectile();
 	Projectile(sf::Vector2f shipPosition, sf::Vector2f direction, int player);
 	~Projectile();
-	void Update();
+	void Update(BlackHole* bh);
 	void Draw();
 	void PullTowardsPoint(BlackHole* bh);
 	sf::Vector2f GetPosition();
@@ -20,4 +20,5 @@ private:
 	sf::Vector2f velocity;
 	int owner; //which player shot this projectile
 	bool active;
+	int framesSinceBirth;
 };

@@ -25,6 +25,7 @@ void PM::Update(BlackHole* bh)
 		{
 			std::list<Projectile*>::iterator previous = it++;
 			activeProjectiles.erase(previous);
+			//delete &previous;
 			//decide if it should continue or break this loop
 			//continue if there is more stuff in the list
 			//break if it is the end of the list
@@ -33,7 +34,7 @@ void PM::Update(BlackHole* bh)
 			else
 				continue;
 		}
-		(*it)->Update();
+		(*it)->Update(bh);
 		(*it)->PullTowardsPoint(bh);
 	}
 	//printf("Projectiles contains %d elements\n", activeProjectiles.size());
